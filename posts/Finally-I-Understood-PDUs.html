@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Learned the Secret Names of Data — And Finally Understood PDUs — Zero's Blog</title>
+    <meta name="description" content="I Learned the Secret Names of Data — And Finally Understood PDUs">
+    <link rel="stylesheet" href="../blog.css">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <header class="site-header">
+        <a href="../index.html" class="back-link">← Back to Blog</a>
+    </header>
+
+    <main class="container">
+        <article class="post">
+            <header class="post-header">
+                <h1>I Learned the Secret Names of Data — And Finally Understood PDUs</h1>
+                
+                <div class="post-meta">
+                    <span class="date"></span>
+                    <span class="read-time">3 min read</span>
+                    <span class="author">by Zero</span>
+                </div>
+                
+            </header>
+
+            <div class="post-content">
+<img src="https://miro.medium.com/v2/resize:fill:34:34/1*rHUV4ADBJgTTdzR8mUnhGw.png" alt="Zero">
+<p>Listen</p>
+<p>Share</p>
+<p>More</p>
+<p>You know how we call water different names depending on where it is?</p>
+<p>In a glass = water</p>
+<p>In the air = vapor</p>
+<p>In the ground = ice</p>
+<p>Same thing with data in a network.</p>
+<p>Depending on which layer it’s at, it has a different name.</p>
+<p>That’s the PDU — Protocol Data Unit.</p>
+<h2>What Is a PDU?</h2>
+<p>PDU stands for Protocol Data Unit.</p>
+<p>It’s just a fancy term for “what we call the data at a specific layer of the OSI or TCP/IP model.”</p>
+<p>Each layer has its own PDU name.</p>
+<p>Layer 7 — Application: The PDU is called DATA</p>
+<p>Layer 4 — Transport: The PDU is called a SEGMENT</p>
+<p>Layer 3 — Network: The PDU is called a PACKET</p>
+<p>Layer 2 — Data Link: The PDU is called a FRAME</p>
+<p>Layer 1 — Physical: The PDU is called BITS</p>
+<h2>What Makes Each PDU Different?</h2>
+<p>DATA (Layer 7) — Just the raw message. No extra info yet. Example: “Hey, are you there?”</p>
+<p>SEGMENT (Layer 4) — Data plus a TCP or UDP header. That header contains source and destination port numbers.</p>
+<p>PACKET (Layer 3) — Segment plus an IP header. That header contains source and destination IP addresses.</p>
+<p>FRAME (Layer 2) — Packet plus a MAC header and a trailer. That header contains source and destination MAC addresses.</p>
+<p>BITS (Layer 1) — The frame converted into 0s and 1s. Electrical signals, light pulses, or radio waves.</p>
+<h2>Why Should You Care?</h2>
+<p>When you talk to other network people, they use these words.</p>
+<p>A frame is not the same as a packet.</p>
+<p>A segment is not the same as data.</p>
+<p>Using the right name shows you know what you’re talking about.</p>
+<p>It also helps you troubleshoot. If someone says “check the frame,” you know they mean Layer 2. If they say “check the packet,” you know they mean Layer 3.</p>
+<h2>The Journey of a PDU</h2>
+<p>At the sender (encapsulation):</p>
+<p>The data starts at Layer 7 as DATA.</p>
+<p>It moves down to Layer 4 and becomes a SEGMENT.</p>
+<p>It moves down to Layer 3 and becomes a PACKET.</p>
+<p>It moves down to Layer 2 and becomes a FRAME.</p>
+<p>It moves down to Layer 1 and becomes BITS.</p>
+<p>The bits travel across the cable.</p>
+<p>At the receiver (de-encapsulation):</p>
+<p>The bits arrive at Layer 1.</p>
+<p>They move up to Layer 2 and become a FRAME.</p>
+<p>They move up to Layer 3 and become a PACKET.</p>
+<p>They move up to Layer 4 and become a SEGMENT.</p>
+<p>They move up to Layer 7 and become DATA again.</p>
+<p>The original message is delivered.</p>
+<h2>The Cheat Sheet</h2>
+<p>Encapsulation (going down):DATA → SEGMENT → PACKET → FRAME → BITS</p>
+<p>De-encapsulation (going up):BITS → FRAME → PACKET → SEGMENT → DATA</p>
+<p>Same data. Different names. Different layers.</p>
+<h2>A Simple Analogy</h2>
+<p>Think of sending a letter through the postal system.</p>
+<p>DATA = The message you wrote on the paper</p>
+<p>SEGMENT = Putting the letter in an envelope and writing “From: John, To: Mary”</p>
+<p>PACKET = Writing the full address on the envelope (city, street, zip code)</p>
+<p>FRAME = Putting that envelope inside a shipping box with a tracking label</p>
+<p>BITS = The postal truck driving on the road</p>
+<p>At the destination, everything gets unwrapped in reverse order until only the original message remains.</p>
+<h2>Quick Reference</h2>
+<ul>
+<li>DATA = Layer 7 — the actual message</li>
+<li>SEGMENT = Layer 4 — adds port numbers (TCP/UDP)</li>
+<li>PACKET = Layer 3 — adds IP addresses</li>
+<li>FRAME = Layer 2 — adds MAC addresses</li>
+<li>BITS = Layer 1–0s and 1s on the wire</li>
+</ul><h2>What This Taught Me</h2>
+<p>1. PDUs are just names for the same thing at different layers.Don’t let the fancy term scare you. It’s like calling water “ice” when it’s frozen.</p>
+<p>2. Each layer adds something new.The PDU name changes because the data grows. A segment has ports. A packet has IPs. A frame has MACs.</p>
+<p>3. The names help you communicate.When you say “packet,” everyone knows you mean Layer 3. When you say “frame,” everyone knows you mean Layer 2.</p>
+<p>4. Encapsulation and PDUs go hand in hand.As you encapsulate, the PDU name changes. As you de-encapsulate, the PDU name changes back.</p>
+<h2>Final Thought</h2>
+<p>PDU is just a fancy word for “what we call the data right now.”</p>
+<p>Learn the five names:</p>
+<p>Data, Segment, Packet, Frame, Bits.</p>
+<p>That’s it. That’s the whole concept.</p>
+<p>Next time someone asks you “what’s a PDU?” — you smile and say “it depends which layer you’re at.”</p>
+<p>Which PDU name confused you the most when you started? Drop it in the comments.</p>
+<p>#PDU #ProtocolDataUnit #OSIModel #Encapsulation #NetworkLayers #DataSegmentPacketFrameBits #CCNA #NetworkingBasics</p>
+
+            </div>
+
+            <footer class="post-footer">
+                <a href="../index.html">← All Posts</a>
+                <a href="https://medium.com/@0x9z" target="_blank">Follow on Medium</a>
+            </footer>
+        </article>
+    </main>
+</body>
+</html>
