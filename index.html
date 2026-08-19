@@ -22,7 +22,6 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://api.rss2json.com">
     
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -112,25 +111,148 @@
     <!-- Blog Posts Grid -->
     <main class="blog-main">
         <div class="container">
-            <!-- Posts will be loaded here -->
             <div class="blog-grid" id="blog-grid">
-                <!-- Loading skeleton -->
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-            </div>
-            
-            <!-- Error message -->
-            <div class="blog-error" id="blog-error" style="display:none;">
-                <i class="fas fa-exclamation-circle"></i>
-                <h3>Failed to load posts</h3>
-                <p>Please check back later or visit my Medium directly.</p>
-                <a href="https://medium.com/@0x9z" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                    Visit Medium
+
+                <!-- POST 1 -->
+                <a href="posts/10-Linux-Commands-Every-IT-Professional-Must-Know.html" class="blog-card">
+                    <div class="blog-card-thumbnail"><div class="no-image"><i class="fas fa-terminal"></i></div></div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Linux</span>
+                        <h2 class="blog-card-title">10 Linux Commands Every IT Professional Must Know</h2>
+                        <p class="blog-card-excerpt">Essential commands for daily Linux administration and troubleshooting.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> August 2026</span>
+                            <span class="blog-card-read">Read More <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
                 </a>
+
+                <!-- POST 2 -->
+                <a href="posts/CUT-Command.html" class="blog-card">
+                    <div class="blog-card-thumbnail"><div class="no-image"><i class="fas fa-scissors"></i></div></div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Linux</span>
+                        <h2 class="blog-card-title">The cut Command: A Linux Beginner's Complete Guide</h2>
+                        <p class="blog-card-excerpt">Extract data like a pro with the cut command. Master flags, examples, and avoid mistakes.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> October 2026</span>
+                            <span class="blog-card-read">Read More <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- POST 3 -->
+                <a href="posts/Finally-I-Understood-PDUs.html" class="blog-card">
+                    <div class="blog-card-thumbnail"><div class="no-image"><i class="fas fa-box"></i></div></div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Networking</span>
+                        <h2 class="blog-card-title">Finally I Understood PDUs</h2>
+                        <p class="blog-card-excerpt">Protocol Data Units explained simply — what they are and why they matter.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> August 2026</span>
+                            <span class="blog-card-read">Read More <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- POST 4 -->
+                <a href="posts/Finally-I-Understood-The-Encapsulation-%26-De-encapsulation.html" class="blog-card">
+                    <div class="blog-card-thumbnail"><div class="no-image"><i class="fas fa-layer-group"></i></div></div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Networking</span>
+                        <h2 class="blog-card-title">Encapsulation & De-encapsulation Explained</h2>
+                        <p class="blog-card-excerpt">How data travels through network layers — finally understood.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> August 2026</span>
+                            <span class="blog-card-read">Read More <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- POST 5 -->
+                <a href="posts/I-Built-a-Network-in-Packet-Tracer.html" class="blog-card">
+                    <div class="blog-card-thumbnail"><div class="no-image"><i class="fas fa-network-wired"></i></div></div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">CCNA</span>
+                        <h2 class="blog-card-title">I Built a Network in Packet Tracer</h2>
+                        <p class="blog-card-excerpt">My first Cisco network topology — what I learned and what went wrong.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> August 2026</span>
+                            <span class="blog-card-read">Read More <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- POST 6 -->
+                <a href="posts/I-Killed-Firefox-From-the-Terminal.html" class="blog-card">
+                    <div class="blog-card-thumbnail"><div class="no-image"><i class="fab fa-firefox"></i></div></div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Linux</span>
+                        <h2 class="blog-card-title">I Killed Firefox From the Terminal</h2>
+                        <p class="blog-card-excerpt">A terminal accident that taught me about process management.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> August 2026</span>
+                            <span class="blog-card-read">Read More <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- POST 7 -->
+                <a href="posts/I-watched-a-Packet-get-lost-in-My-Home-Network.html" class="blog-card">
+                    <div class="blog-card-thumbnail"><div class="no-image"><i class="fas fa-wifi"></i></div></div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Networking</span>
+                        <h2 class="blog-card-title">I Watched a Packet Get Lost in My Home Network</h2>
+                        <p class="blog-card-excerpt">Troubleshooting network issues and understanding packet loss.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> August 2026</span>
+                            <span class="blog-card-read">Read More <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- POST 8 -->
+                <a href="posts/LPIC-1-VS-CompTIA-Linux%2B.html" class="blog-card">
+                    <div class="blog-card-thumbnail"><div class="no-image"><i class="fas fa-certificate"></i></div></div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Certifications</span>
+                        <h2 class="blog-card-title">LPIC-1 VS CompTIA Linux+</h2>
+                        <p class="blog-card-excerpt">Which Linux certification should you choose? My honest comparison.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> August 2026</span>
+                            <span class="blog-card-read">Read More <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- POST 9 -->
+                <a href="posts/Mastering-Cisco-IOS-Command-Modes.html" class="blog-card">
+                    <div class="blog-card-thumbnail"><div class="no-image"><i class="fas fa-terminal"></i></div></div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">CCNA</span>
+                        <h2 class="blog-card-title">Mastering Cisco IOS Command Modes</h2>
+                        <p class="blog-card-excerpt">Understand exec, privileged, and configuration modes.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> August 2026</span>
+                            <span class="blog-card-read">Read More <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- POST 10 -->
+                <a href="posts/TCP-IP-Suite—The-Internet’s-Actual-Language.html" class="blog-card">
+                    <div class="blog-card-thumbnail"><div class="no-image"><i class="fas fa-globe"></i></div></div>
+                    <div class="blog-card-content">
+                        <span class="blog-card-category">Networking</span>
+                        <h2 class="blog-card-title">TCP-IP Suite — The Internet's Actual Language</h2>
+                        <p class="blog-card-excerpt">How the internet really communicates under the hood.</p>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-date"><i class="far fa-calendar"></i> August 2026</span>
+                            <span class="blog-card-read">Read More <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+
             </div>
         </div>
     </main>
@@ -157,7 +279,7 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Zero. All rights reserved.</p>
-                <p>Designed with <i class="fas fa-heart"></i></p>
+                <p>Designed bt @0x9z with <i class="fas fa-heart"></i></p>
             </div>
         </div>
     </footer>
