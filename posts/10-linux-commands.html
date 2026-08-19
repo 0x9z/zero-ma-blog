@@ -17,69 +17,114 @@
         <article class="post">
             <header class="post-header">
                 <h1>10 Linux Commands Every IT Professional Must Know</h1>
-                
+
                 <div class="post-meta">
                     <span class="date"></span>
-                    <span class="read-time">4 min read</span>
+                    <span class="read-time">5 min read</span>
                     <span class="author">by Zero</span>
                 </div>
-                
+
             </header>
 
             <div class="post-content">
-<img src="https://miro.medium.com/v2/resize:fill:34:34/1*rHUV4ADBJgTTdzR8mUnhGw.png" alt="Zero">
-<p>1</p>
-<p>Listen</p>
-<p>Share</p>
-<p>More</p>
-<img src="https://miro.medium.com/v2/resize:fit:750/1*E1kCnzS4s0nGPmSk3LK-qA.jpeg" alt="">
-<p class="caption">10 Linux Commands Every IT Professional Must Know</p>
-<p>10 Linux Commands Every IT Professional Must Know</p>
-<p>If you’re stepping into IT — sysadmin, helpdesk, networking, security, doesn’t matter — Linux will find you eventually. Maybe it’s a server you need to SSH into at 2 AM. Maybe it’s a Docker container that’s misbehaving. Maybe it’s just a coworker saying “can you check the logs on the box real quick.”</p>
-<p>I didn’t learn these commands from a course. I learned them because something broke and I had no other choice. Here are the 10 I reach for the most, and why each one actually matters — not just what it does.</p>
-<ol>
-<li>ls -lah</li>
-</ol><p>Everyone knows ls. Almost nobody uses it right.</p>
-<p>-l gives you the long format: permissions, owner, size, modified date. -a shows hidden files (the ones starting with a dot — configs live here). -h makes file sizes human-readable, so you see "4.2M" instead of "4404019".</p>
-<p>Run it as three separate flags if you want, but ls -lah should be muscle memory before you touch anything else in a directory you don't recognize.</p>
-<ol>
-<li>cd — and pushd/popd</li>
-</ol><p>Not glamorous, but cd - takes you back to the previous directory instantly. When you're bouncing between /etc/nginx and /var/log/nginx fixing a config issue, this alone saves you dozens of keystrokes a day.</p>
-<ol>
-<li>grep -r “pattern” .</li>
-</ol><p>Something is broken and you don’t know which file is the culprit. grep -r searches recursively through every file in a directory for a string. Add -i for case-insensitive, -n to show line numbers, -l to just list matching filenames instead of every match.</p>
-<p>The day you grep through /var/log for an error string and find the exact line that explains an outage — that's the day this command becomes permanent.</p>
-<ol>
-<li>chmod and chown</li>
-</ol><p>Permissions are where Linux either protects you or blocks you, and understanding them is non-negotiable.</p>
-<p>chmod 755 script.sh sets read/write/execute for the owner and read/execute for everyone else. chown user:group file changes who owns it. Half of the "permission denied" errors you'll ever see get fixed with one of these two commands — the other half get fixed by realizing you're not using sudo.</p>
-<ol>
-<li>systemctl status <service></li>
-</ol><p>Modern Linux runs on systemd, and systemctl is how you talk to it. status tells you if a service is running, when it started, and — critically — the last few log lines if it crashed.</p>
-<p>Pair it with systemctl restart <service> and journalctl -u <service> -f (to follow logs live) and you can diagnose most service failures without opening a single file.</p>
-<ol>
-<li>df -h and du -sh *</li>
-</ol><p>df -h shows disk space per filesystem — the first command you run when something says "no space left on device." du -sh * shows you the size of everything in the current directory, so you can actually find what's eating the space.</p>
-<p>Run them back to back and you’ll find the runaway log file or forgotten backup in under a minute.</p>
-<ol>
-<li>top or htop</li>
-</ol><p>Server feels slow? top (or htop if it's installed — install it, it's better) gives you a live view of CPU, memory, and which processes are responsible. You're looking for the process pinning a core at 100% or eating all your RAM.</p>
-<p>This is the command that turns “the server is slow” from a mystery into a five-second diagnosis.</p>
-<ol>
-<li>ssh user@host</li>
-</ol><p>If you work in IT and you’re not comfortable with ssh, that's the first gap to close. It's how you get a terminal on a remote machine, and everything else on this list becomes useless if you can't reach the box in the first place.</p>
-<p>Learn ssh-copy-id next — it sets up key-based login so you stop typing passwords, and start actually being secure.</p>
-<ol>
-<li>tail -f /var/log/syslog</li>
-</ol><p>tail shows you the end of a file. The -f flag makes it follow the file live, streaming new lines as they're written. This is how you watch a log in real time while you reproduce a bug or trigger the failure again.</p>
-<p>Swap the path for whatever log matters — nginx, auth.log, a custom app log — and you’re watching your system think out loud.</p>
-<ol>
-<li>history | grep <command></li>
-</ol><p>You know you ran that exact command last week. You don’t remember the flags. history shows your full command history, and piping it into grep lets you search it instead of scrolling forever.</p>
+
+<p>If you're stepping into IT — sysadmin, helpdesk, networking, security, doesn't matter — Linux will find you eventually. Maybe it's a server you need to SSH into at 2 AM. Maybe it's a Docker container that's misbehaving. Maybe it's just a coworker saying "can you check the logs on the box real quick."</p>
+<p>I didn't learn these commands from a course. I learned them because something broke and I had no other choice. Here are the 10 I reach for the most, and why each one actually matters — not just what it does.</p>
+
+<h2>1. ls -lah</h2>
+<p>Everyone knows <code>ls</code>. Almost nobody uses it right.</p>
+<p><code>-l</code> gives you the long format: permissions, owner, size, modified date. <code>-a</code> shows hidden files (the ones starting with a dot — configs live here). <code>-h</code> makes file sizes human-readable, so you see "4.2M" instead of "4404019".</p>
+<pre><code>ls -lah</code></pre>
+<p>Run it as three separate flags if you want, but <code>ls -lah</code> should be muscle memory before you touch anything else in a directory you don't recognize.</p>
+
+<h2>2. cd - and pushd/popd</h2>
+<p>Not glamorous, but <code>cd -</code> takes you back to the previous directory instantly. When you're bouncing between <code>/etc/nginx</code> and <code>/var/log/nginx</code> fixing a config issue, this alone saves you dozens of keystrokes a day.</p>
+<pre><code>cd /etc/nginx
+cd /var/log/nginx
+cd -   # back to /etc/nginx</code></pre>
+
+<h2>3. grep -r "pattern" .</h2>
+<p>Something is broken and you don't know which file is the culprit. <code>grep -r</code> searches recursively through every file in a directory for a string. Add <code>-i</code> for case-insensitive, <code>-n</code> to show line numbers, <code>-l</code> to just list matching filenames instead of every match.</p>
+<pre><code>grep -rin "connection refused" /var/log</code></pre>
+<p>The day you grep through <code>/var/log</code> for an error string and find the exact line that explains an outage — that's the day this command becomes permanent.</p>
+
+<h2>4. chmod and chown</h2>
+<p>Permissions are where Linux either protects you or blocks you, and understanding them is non-negotiable.</p>
+<pre><code>chmod 755 script.sh
+chown user:group file</code></pre>
+<p><code>chmod 755 script.sh</code> sets read/write/execute for the owner and read/execute for everyone else. <code>chown user:group file</code> changes who owns it. Half of the "permission denied" errors you'll ever see get fixed with one of these two commands — the other half get fixed by realizing you're not using <code>sudo</code>.</p>
+
+<h2>5. systemctl status &lt;service&gt;</h2>
+<p>Modern Linux runs on systemd, and <code>systemctl</code> is how you talk to it. <code>status</code> tells you if a service is running, when it started, and — critically — the last few log lines if it crashed.</p>
+<pre><code>systemctl status nginx
+systemctl restart nginx
+journalctl -u nginx -f</code></pre>
+<p>Pair <code>status</code> with <code>restart</code> and <code>journalctl -u &lt;service&gt; -f</code> (to follow logs live) and you can diagnose most service failures without opening a single file.</p>
+
+<h2>6. df -h and du -sh *</h2>
+<pre><code>df -h
+du -sh *</code></pre>
+<p><code>df -h</code> shows disk space per filesystem — the first command you run when something says "no space left on device." <code>du -sh *</code> shows you the size of everything in the current directory, so you can actually find what's eating the space.</p>
+<p>Run them back to back and you'll find the runaway log file or forgotten backup in under a minute.</p>
+
+<h2>7. top or htop</h2>
+<p>Server feels slow? <code>top</code> (or <code>htop</code> if it's installed — install it, it's better) gives you a live view of CPU, memory, and which processes are responsible. You're looking for the process pinning a core at 100% or eating all your RAM.</p>
+<pre><code>htop</code></pre>
+<p>This is the command that turns "the server is slow" from a mystery into a five-second diagnosis.</p>
+
+<h2>8. ssh user@host</h2>
+<p>If you work in IT and you're not comfortable with <code>ssh</code>, that's the first gap to close. It's how you get a terminal on a remote machine, and everything else on this list becomes useless if you can't reach the box in the first place.</p>
+<pre><code>ssh user@host
+ssh-copy-id user@host</code></pre>
+<p>Learn <code>ssh-copy-id</code> next — it sets up key-based login so you stop typing passwords, and start actually being secure.</p>
+
+<h2>9. tail -f /var/log/syslog</h2>
+<p><code>tail</code> shows you the end of a file. The <code>-f</code> flag makes it follow the file live, streaming new lines as they're written. This is how you watch a log in real time while you reproduce a bug or trigger the failure again.</p>
+<pre><code>tail -f /var/log/syslog</code></pre>
+<p>Swap the path for whatever log matters — nginx, auth.log, a custom app log — and you're watching your system think out loud.</p>
+
+<h2>10. history | grep &lt;command&gt;</h2>
+<p>You know you ran that exact command last week. You don't remember the flags. <code>history</code> shows your full command history, and piping it into <code>grep</code> lets you search it instead of scrolling forever.</p>
+<pre><code>history | grep ssh</code></pre>
 <p>Small command, but it saves you from re-deriving the same one-liner from scratch every time.</p>
-<p>Why these 10</p>
-<p>None of these are exotic. That’s the point. Every one of them is something you’ll use in your first week on any Linux box, and all ten together cover almost everything a beginner IT professional actually needs: finding files, fixing permissions, checking services, watching resources, reading logs, and getting into the machine in the first place.</p>
-<p>I’m building this list the same way I built my subnet calculator and my backup script — by hitting the wall first, then writing down what got me through it. If you’re earlier in the journey than me, start with these ten. You’ll add the next twenty on your own, the same way I did — one broken thing at a time.</p>
+
+<h2>Why These 10</h2>
+<p>None of these are exotic. That's the point. Every one of them is something you'll use in your first week on any Linux box, and all ten together cover almost everything a beginner IT professional actually needs: finding files, fixing permissions, checking services, watching resources, reading logs, and getting into the machine in the first place.</p>
+<p>I'm building this list the same way I built my subnet calculator and my backup script — by hitting the wall first, then writing down what got me through it. If you're earlier in the journey than me, start with these ten. You'll add the next twenty on your own, the same way I did — one broken thing at a time.</p>
+
+<h2>Quick Reference</h2>
+<pre><code># File listing
+ls -lah
+
+# Navigate back
+cd -
+
+# Search recursively
+grep -rin "pattern" .
+
+# Fix permissions / ownership
+chmod 755 file
+chown user:group file
+
+# Service status and logs
+systemctl status &lt;service&gt;
+journalctl -u &lt;service&gt; -f
+
+# Disk usage
+df -h
+du -sh *
+
+# Live resource monitor
+htop
+
+# Remote access
+ssh user@host
+
+# Follow a log live
+tail -f /var/log/syslog
+
+# Search command history
+history | grep &lt;command&gt;</code></pre>
 
             </div>
 
