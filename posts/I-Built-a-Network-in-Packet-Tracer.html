@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Built a Network in Packet Tracer — And Finally Understood the OSI Model — Zero's Blog</title>
+    <meta name="description" content="I Built a Network in Packet Tracer — And Finally Understood the OSI Model">
+    <link rel="stylesheet" href="../blog.css">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <header class="site-header">
+        <a href="../index.html" class="back-link">← Back to Blog</a>
+    </header>
+
+    <main class="container">
+        <article class="post">
+            <header class="post-header">
+                <h1>I Built a Network in Packet Tracer — And Finally Understood the OSI Model</h1>
+                
+                <div class="post-meta">
+                    <span class="date"></span>
+                    <span class="read-time">2 min read</span>
+                    <span class="author">by Zero</span>
+                </div>
+                
+            </header>
+
+            <div class="post-content">
+<img src="https://miro.medium.com/v2/resize:fill:34:34/1*rHUV4ADBJgTTdzR8mUnhGw.png" alt="Zero">
+<p>1</p>
+<p>Listen</p>
+<p>Share</p>
+<p>More</p>
+<img src="https://miro.medium.com/v2/resize:fit:750/1*tFzYn2lW9siibuqOwRNh7Q.jpeg" alt="">
+<p class="caption">The OSI Reference Model</p>
+<p>I kept hearing “OSI model” in every networking tutorial.</p>
+<p>Seven layers. Weird names. Everyone said it was important. Nobody explained why.</p>
+<p>Then I built two computers, a switch, and a router in Packet Tracer — and watched what actually happens when a ping travels from one PC to another.</p>
+<p>Here’s what I learned.</p>
+<h2>What Actually Happens When You Ping?</h2>
+<p>You type this on PC1:</p>
+<pre><code>ping 192.168.1.2</code></pre>
+<p>In your head: “PC1 asks PC2 if it’s there.”</p>
+<p>But under the hood, seven different things happen — that’s the OSI model.</p>
+<h2>The Only 3 Layers You’ll Actually Touch (At First)</h2>
+<p>Don’t memorize all seven. Focus here:</p>
+<p>Layer 3 (Network) = IP addresses192.168.1.1 — this is what you configure on routers</p>
+<p>Layer 2 (Data Link) = MAC addressesAA:BB:CC:DD:EE:FF — switches use these</p>
+<p>Layer 1 (Physical) = The cableIs it plugged in? Did you use the right wire?</p>
+<h2>See It Yourself in Packet Tracer</h2>
+<ol>
+<li>Put two PCs on a switch</li>
+<li>Give them IPs: 192.168.1.1 and 192.168.1.2</li>
+<li>Go to Simulation mode (bottom right)</li>
+<li>Ping from PC1 to PC2</li>
+<li>Click the envelope — watch it go down the layers on PC1, travel, then up the layers on PC2</li>
+</ol><p>That’s the OSI model working live.</p>
+<h2>What This Taught Me</h2>
+<ol>
+<li>The OSI model is just a map. It tells you where a problem lives — wrong IP? Layer 3. Cable unplugged? Layer 1.</li>
+<li>In Packet Tracer, you can see every layer. Simulation mode shows you the exact path.</li>
+<li>Don’t memorize — trace. Next time something doesn’t work, ask: “Which layer is failing?”</li>
+</ol><h2>Quick Reference</h2>
+<pre><code>Physical (L1)   → Check the cableData Link (L2)  → Check MAC addressesNetwork (L3)    → Check IP addresses</code></pre>
+<p>Everything above L3? You’ll learn it later. Promise.</p>
+
+            </div>
+
+            <footer class="post-footer">
+                <a href="../index.html">← All Posts</a>
+                <a href="https://medium.com/@0x9z" target="_blank">Follow on Medium</a>
+            </footer>
+        </article>
+    </main>
+</body>
+</html>
