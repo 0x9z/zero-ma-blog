@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Watched a Message Get Wrapped and Unwrapped — And Finally Understood Encapsulation — Zero's Blog</title>
+    <meta name="description" content="I Watched a Message Get Wrapped and Unwrapped — And Finally Understood Encapsulation">
+    <link rel="stylesheet" href="../blog.css">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <header class="site-header">
+        <a href="../index.html" class="back-link">← Back to Blog</a>
+    </header>
+
+    <main class="container">
+        <article class="post">
+            <header class="post-header">
+                <h1>I Watched a Message Get Wrapped and Unwrapped — And Finally Understood Encapsulation</h1>
+                
+                <div class="post-meta">
+                    <span class="date"></span>
+                    <span class="read-time">5 min read</span>
+                    <span class="author">by Zero</span>
+                </div>
+                
+            </header>
+
+            <div class="post-content">
+<img src="https://miro.medium.com/v2/resize:fill:34:34/1*rHUV4ADBJgTTdzR8mUnhGw.png" alt="Zero">
+<p>Listen</p>
+<p>Share</p>
+<p>More</p>
+<p>You send a message to your friend.</p>
+<p>“Hey, wanna grab coffee?”</p>
+<p>Simple, right?</p>
+<p>But behind the scenes, that message gets wrapped in layers — like putting a letter in an envelope, then that envelope in a shipping box, then that box on a truck.</p>
+<p>That’s encapsulation.</p>
+<p>Then your friend receives it and unwraps everything.</p>
+<p>That’s de-encapsulation.</p>
+<p>Let me show you exactly how it works.</p>
+<h2>What Is Encapsulation?</h2>
+<p>Encapsulation is the process of adding headers (wrappers) to data as it moves down the OSI or TCP/IP model.</p>
+<p>Each layer adds its own information so the receiving device knows how to handle it.</p>
+<p>Think of it like mailing a gift:</p>
+<p>Step 1 — You write a letter. That’s the actual data at the Application layer.</p>
+<p>Step 2 — You put the letter in an envelope. That’s the Transport layer adding port numbers (TCP/UDP).</p>
+<p>Step 3 — You write the address on the envelope. That’s the Network layer adding source and destination IPs.</p>
+<p>Step 4 — You put the envelope inside a shipping box. That’s the Data Link layer adding source and destination MACs.</p>
+<p>Step 5 — You hand the box to the delivery driver. That’s the Physical layer sending the bits as signals.</p>
+<p>That last step is the actual transmission — the truck on the road.</p>
+<h2>Step-by-Step: How Encapsulation Works</h2>
+<p>Let’s say PC1 (192.168.1.1) sends a ping to PC2 (192.168.1.2).</p>
+<p>Step 1 — Application Layer (Layer 7)The ping command creates the raw data. Just the message “hey, are you there?”</p>
+<p>Step 2 — Transport Layer (Layer 4)The data gets wrapped with a TCP or UDP header. This header contains:</p>
+<ul>
+<li>Source port (random number like 50000)</li>
+<li>Destination port (for ping, it’s usually port 7 or 8)</li>
+</ul><p>Now we call it a segment.</p>
+<p>Step 3 — Network Layer (Layer 3)The segment gets wrapped with an IP header. This header contains:</p>
+<ul>
+<li>Source IP: 192.168.1.1</li>
+<li>Destination IP: 192.168.1.2</li>
+</ul><p>Now we call it a packet.</p>
+<p>Step 4 — Data Link Layer (Layer 2)The packet gets wrapped with an Ethernet header (MAC addresses). This header contains:</p>
+<ul>
+<li>Source MAC: AA:BB:CC:DD:EE:11</li>
+<li>Destination MAC: AA:BB:CC:DD:EE:22</li>
+</ul><p>Now we call it a frame.</p>
+<p>Step 5 — Physical Layer (Layer 1)The frame (just 0s and 1s now) gets sent as electrical signals, light pulses, or radio waves through the cable.</p>
+<h2>The Big Picture of Encapsulation</h2>
+<pre><code>Data (Layer 7)    ↓[TCP/UDP header + Data]  ← Segment (Layer 4)    ↓[IP header + TCP/UDP header + Data]  ← Packet (Layer 3)    ↓[MAC header + IP header + TCP/UDP header + Data + MAC trailer]  ← Frame (Layer 2)    ↓Bits sent as signals (Layer 1)</code></pre>
+<p>Each layer adds something to the front (header) and sometimes the end (trailer).</p>
+<p>The data keeps growing as it goes down.</p>
+<h2>What Is De-Encapsulation?</h2>
+<p>De-encapsulation is the reverse process.</p>
+<p>When the receiving device gets the bits, it works from Layer 1 up to Layer 7, removing each header as it goes.</p>
+<p>Think of it like opening that gift:</p>
+<p>Step 1 — The delivery driver hands you the box. That’s the Physical layer receiving signals.</p>
+<p>Step 2 — You look at the shipping label. It has the MAC addresses. That’s the Data Link layer reading and removing the MAC header.</p>
+<p>Step 3 — You open the box and find an envelope inside. On the envelope are the IP addresses. That’s the Network layer reading and removing the IP header.</p>
+<p>Step 4 — You open the envelope and find a letter. The letter has port numbers on it. That’s the Transport layer reading and removing the TCP/UDP header.</p>
+<p>Step 5 — You read the letter. That’s the Application layer getting the original data.</p>
+<h2>Step-by-Step: How De-Encapsulation Works</h2>
+<p>PC2 receives the bits from PC1.</p>
+<p>Step 1 — Physical Layer (Layer 1)PC2 receives electrical signals. It converts them back into 0s and 1s (a frame).</p>
+<p>Step 2 — Data Link Layer (Layer 2)PC2 reads the MAC header. It checks:</p>
+<ul>
+<li>“Is this MAC address mine?”</li>
+<li>If yes → removes the MAC header and trailer</li>
+<li>Passes the remaining data (packet) up to Layer 3</li>
+</ul><p>Step 3 — Network Layer (Layer 3)PC2 reads the IP header. It checks:</p>
+<ul>
+<li>“Is this IP address mine?”</li>
+<li>If yes → removes the IP header</li>
+<li>Passes the remaining data (segment) up to Layer 4</li>
+</ul><p>Step 4 — Transport Layer (Layer 4)PC2 reads the TCP/UDP header. It checks:</p>
+<ul>
+<li>“Which application should get this data?”</li>
+<li>Removes the TCP/UDP header</li>
+<li>Passes the remaining data (raw data) up to Layer 7</li>
+</ul><p>Step 5 — Application Layer (Layer 7)PC2 gets the original data: “hey, are you there?”</p>
+<p>PC2 responds with a reply, and the whole process repeats.</p>
+<h2>The Big Picture of De-Encapsulation</h2>
+<pre><code>Bits received from cable (Layer 1)    ↓Frame → MAC header removed (Layer 2)    ↓Packet → IP header removed (Layer 3)    ↓Segment → TCP/UDP header removed (Layer 4)    ↓Data (Layer 7) ← Original message</code></pre>
+<p>Each layer removes its own header and passes the rest up.</p>
+<p>The data keeps shrinking as it goes up.</p>
+<h2>Encapsulation + De-Encapsulation = Communication</h2>
+<p>Here’s the full cycle:</p>
+<pre><code>PC1                                    PC2</code></pre>
+<pre><code>Data (Hi!)                                 ↓                                   Segment (adds ports)                       ↓                                   Packet (adds IPs)                          ↓                                   Frame (adds MACs)                          ↓                                   Bits (sent over cable)  ──────────→   Bits (received)                                       ↓                                    Frame (remove MAC)                                       ↓                                    Packet (remove IP)                                       ↓                                    Segment (remove ports)                                       ↓                                    Data (Hi!)</code></pre>
+<h2>See It Yourself in Packet Tracer</h2>
+<ol>
+<li>Open Packet Tracer</li>
+<li>Put two PCs on a switch</li>
+<li>Give them IPs: 192.168.1.1 and 192.168.1.2</li>
+<li>Go to Simulation mode (bottom right)</li>
+<li>Ping from PC1 to PC2</li>
+<li>Click on the envelope as it travels</li>
+</ol><p>You will see:</p>
+<ul>
+<li>On PC1: Data → Segment → Packet → Frame → Bits (data gets bigger)</li>
+<li>On the wire: The frame traveling</li>
+<li>On PC2: Bits → Frame → Packet → Segment → Data (data gets smaller)</li>
+</ul><p>That’s Encapsulation and De-encapsulation live.</p>
+<h2>Quick Reference:</h2>
+<p>Encapsulation (Sender):</p>
+<pre><code>Data → Segment → Packet → Frame → Bits</code></pre>
+<p>De-encapsulation (Receiver):</p>
+<pre><code>Bits → Frame → Packet → Segment → Data</code></pre>
+<p>Remember:</p>
+<ul>
+<li>Going DOWN = ADDING wrappers (Encapsulation)</li>
+<li>Going UP = REMOVING wrappers (De-encapsulation)</li>
+</ul><h2>What This Taught Me</h2>
+<p>1. Data doesn’t travel alone.It carries instructions with it — like a package with shipping labels. Every router and switch reads only the layer it needs.</p>
+<p>2. Encapsulation and de-encapsulation happen every time.Every single packet you send — a Google search, a YouTube video, a text message — goes through this process.</p>
+<p>3. The OSI model is a roadmap.Encapsulation shows you how the layers actually work together, not just their names.</p>
+<p>4. Packet Tracer makes it visible.You can literally watch the data grow and shrink. That’s the best way to learn it.</p>
+<p>Final thought:</p>
+<p>Encapsulation is just wrapping gifts for shipment.</p>
+<p>De-encapsulation is just unwrapping them at the door.</p>
+<p>The internet works because every device agrees on how to wrap and unwrap.</p>
+<p>Next time your message reaches someone in seconds — remember the invisible wrapping and unwrapping happening behind the scenes.</p>
+<p>What was your “aha” moment with encapsulation? Drop it in the comments.</p>
+
+            </div>
+
+            <footer class="post-footer">
+                <a href="../index.html">← All Posts</a>
+                <a href="https://medium.com/@0x9z" target="_blank">Follow on Medium</a>
+            </footer>
+        </article>
+    </main>
+</body>
+</html>
