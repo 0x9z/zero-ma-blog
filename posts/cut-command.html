@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The cut Command: A Linux Beginner's Complete Guide to Extracting Data Like a Pro — Zero's Blog</title>
+    <meta name="description" content="The cut Command: A Linux Beginner's Complete Guide to Extracting Data Like a Pro">
     <link rel="stylesheet" href="../blog.css">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 </head>
@@ -16,112 +17,107 @@
         <article class="post">
             <header class="post-header">
                 <h1>The cut Command: A Linux Beginner's Complete Guide to Extracting Data Like a Pro</h1>
+
                 <div class="post-meta">
-                    <span class="date">2026-10-03</span>
-                    <span class="author">by 0x9z</span>
+                    <span class="date"></span>
+                    <span class="read-time">6 min read</span>
+                    <span class="author">by Zero</span>
                 </div>
+
             </header>
 
             <div class="post-content">
-<p>Imagine you have a file with thousands of lines. Each line has 10 columns of data. You only need column number 3.</p>
-<p>What do you do?</p>
-<p>A beginner opens the file, reads it manually, and copies what they need. A Linux user types one command and gets the job done in milliseconds.</p>
-<p>That command is cut.
-What Exactly is cut?</p>
-<p>cut is a command-line tool that extracts specific sections from each line of a file or input. It's fast, lightweight, and incredibly powerful when combined with other commands.</p>
-<p>Think of it as scissors — but smarter. You tell it exactly where to cut, and it does it perfectly every time.
-The 3 Core Flags You Must Know</p>
-<p>-d — The Delimiter</p>
-<p>A delimiter is the character that separates your data. In a CSV file, it’s a comma , In /etc/passwd, it's a colon : In a TSV file, it's a tab \t</p>
-<p>-f — The Field</p>
-<p>After defining your delimiter, you tell cut which column (field) you want. -f1 = first column -f2,4 = second AND fourth column -f1-3 = columns 1 through 3</p>
-<p>-c — The Character Position</p>
-<p>When your data has no delimiter, you extract by character position. -c1-5 = characters 1 to 5 from each line -c10 = only the 10th character
-Real World Examples</p>
-<p>Example 1 — Extract all usernames from your system:</p>
-<p>Every Linux system stores users in /etc/passwd. Each line looks like this:</p>
-<p>root:x:0:0:root:/root:/bin/bash</p>
-<p>To extract only the usernames (first field):</p>
-<p>cut -d':' -f1 /etc/passwd
-```
-Output:
-```
-root
-daemon
-bin
-sys
-anas
-```</p>
-<p>Example 2 — Working with CSV files:</p>
-<p>You have a file `employees.csv`:
-```
-John,Developer,50000,New York
-Sara,Designer,45000,London
-Ahmed,SysAdmin,55000,Marrakesh</p>
-<p>Extract only names and cities (columns 1 and 4):</p>
-<p>bash</p>
-<p>cut -d',' -f1,4 employees.csv
-```</p>
-<p>Output:
-```
-John,New York
-Sara,London
-Ahmed,Marrakesh
-```
-**Example 3 - Extract by character position:**
-You have a log file where the date is always the first 10 characters:
-```
-2024-03-04 ERROR: disk full
-2024-03-05 INFO: backup done</p>
-<p>Extract only the dates:</p>
-<p>cut -c1-10 logfile.txt
-```
-Output:
-```
-2024-03-04
-2024-03-05</p>
-<p>The Most Common Beginner Mistake</p>
-<p>Almost every beginner writes this:</p>
-<p>cat file.txt | cut -d':' -f1</p>
-<p>This works. But it’s what Linux veterans call “Useless Use of Cat” 😄
-Write on Medium</p>
-<p>You’re running two commands when one is enough.</p>
-<p>The correct and efficient way:</p>
-<p>cut -d':' -f1 file.txt</p>
-<p>Same result. Faster. Cleaner. More professional. ✅
-Combining cut with Other Commands</p>
-<p>This is where cut becomes truly powerful.</p>
-<p>With grep — find and extract:</p>
-<p>grep 'anas' /etc/passwd | cut -d':' -f1,6</p>
-<p>Find the user “anas” then extract their username and home directory.</p>
-<p>With sort — extract then sort:</p>
-<p>cut -d',' -f2 employees.csv | sort</p>
-<p>Extract the job titles and sort them alphabetically.</p>
-<p>With ps — extract process info:</p>
-<p>ps aux | tr -s ' ' | cut -d' ' -f1,11</p>
-<p>Extract usernames and their running commands.
-Quick Reference Card</p>
-<p>GoalCommandExtract field by delimitercut -d':' -f1 fileExtract multiple fieldscut -d',' -f1,3 fileExtract field rangecut -d':' -f1-3 fileExtract by charactercut -c1-10 fileCombine with grepgrep 'text' file | cut -d':' -f1
-Practice Challenge 🔥</p>
-<p>Try these yourself in your terminal:</p>
-<h1>Challenge 1
-cut -d':' -f1,7 /etc/passwd</h1>
-<h1>Challenge 2
-ps aux | tr -s ' ' | cut -d' ' -f1 | sort | uniq</h1>
-<h1>Challenge 3 - what does this do?
-cut -d':' -f1-4 /etc/passwd | head -5</h1>
-<p>Drop your answers in the comments 👇
-Final Thought</p>
-<p>cut is simple. But mastering simple tools is what separates a real Linux SysAdmin from someone who just knows commands.</p>
-<p>Every expert was once a beginner who took the time to understand the basics deeply.</p>
-<p>Start with cut. Go deep. Then move forward.</p>
-<p>Follow me for daily Linux content — one command at a time. 🐧</p>
-<p>#Linux #SysAdmin #LinuxAdmin #OpenSource #LearningLinux #LPIC1 #DevOps #Medium</p>
+
+<p>I had a file with 40,000 lines. I needed one column out of it — the third one, separated by colons — and nothing else.</p>
+<p>My first instinct was Python. Open the file, split each line, grab index 2, write it back out. Ten minutes of code for something that turned out to be a five-second problem.</p>
+<pre><code>cut -d: -f3 /etc/passwd</code></pre>
+<p>One line. That's the moment <code>cut</code> stopped being "some command I'd seen in tutorials" and became a permanent tool in my terminal.</p>
+
+<h2>What cut Actually Does</h2>
+<p>`cut` extracts sections from each line of a file or input — by character position, by byte, or by delimiter-separated field. It doesn't understand your data the way <code>awk</code> does. It doesn't search like <code>grep</code>. It just slices, cleanly and fast. That narrowness is exactly why it's useful: when a job is "give me column 3," reaching for a bigger tool is overkill.</p>
+
+<h2>The Three Ways to Cut</h2>
+
+<h3>1. By Character Position (-c)</h3>
+<pre><code>echo "Anas Ait Baani" | cut -c1-4</code></pre>
+<p>Output: <code>Anas</code></p>
+<p><code>-c1-4</code> grabs characters 1 through 4 from every line. Useful when your data is fixed-width — old log formats, legacy exports, anything where column 12 always means the same thing regardless of content.</p>
+
+<h3>2. By Byte Position (-b)</h3>
+<pre><code>cut -b1-10 file.txt</code></pre>
+<p>Almost identical to <code>-c</code>, but counts bytes instead of characters. They only diverge with multi-byte encodings (UTF-8 accents, non-Latin scripts) — for plain ASCII text, treat them as the same tool.</p>
+
+<h3>3. By Field, With a Delimiter (-d and -f)</h3>
+<p>This is the one you'll actually use most.</p>
+<pre><code>cut -d: -f3 /etc/passwd</code></pre>
+<p><code>-d:</code> tells `cut` the delimiter is a colon. <code>-f3</code> says "give me field 3." Change the delimiter to match your data — comma for CSVs, tab for TSVs, space for a lot of command output.</p>
+<pre><code>cut -d',' -f1,3 data.csv</code></pre>
+<p>Field lists work too: <code>-f1,3</code> grabs the first and third fields. <code>-f1-3</code> grabs a range. <code>-f2-</code> grabs field 2 through the end of the line.</p>
+
+<h2>Real Situations Where cut Earns Its Place</h2>
+
+<h3>Pulling usernames from /etc/passwd</h3>
+<pre><code>cut -d: -f1 /etc/passwd</code></pre>
+<p><code>/etc/passwd</code> is colon-delimited: username, password placeholder, UID, GID, comment, home directory, shell. Field 1 is always the username, no matter how the rest of the line varies.</p>
+
+<h3>Extracting an IP from a log line</h3>
+<pre><code>echo "192.168.1.10 - - [17/Aug/2026] GET /index.html 200" | cut -d' ' -f1</code></pre>
+<p>Output: <code>192.168.1.10</code></p>
+<p>Web server logs are space-delimited by convention, and the client IP is almost always field 1. Pipe a whole log file through this and you've got a raw list of every IP that hit the server.</p>
+
+<h3>Pulling just the process name from ps</h3>
+<pre><code>ps aux | cut -c1-9,64-</code></pre>
+<p>Character ranges don't have to be contiguous — combine two ranges to grab the username column and the command column while skipping everything in between.</p>
+
+<h3>Getting IPs from ip addr</h3>
+<pre><code>ip -o addr show | cut -d' ' -f7 | cut -d/ -f1</code></pre>
+<p>Notice the chained `cut` here — pipe the output of one `cut` into another with a different delimiter. First pass gets the CIDR block, second pass strips the subnet mask, leaving just the address.</p>
+
+<h2>cut vs awk vs grep: Knowing Which Tool to Reach For</h2>
+<pre><code>grep    -&gt; find lines that match a pattern
+cut     -&gt; extract fixed columns/fields from every line
+awk     -&gt; extract AND transform, with logic and conditions</code></pre>
+<p>If the question is "which lines contain this," that's `grep`. If the question is "give me column 3 of every line," that's `cut` — faster to type and faster to run than reaching for `awk` on a job that doesn't need `awk`'s power. If you need conditions, math, or reformatting, that's when `awk` earns the extra syntax.</p>
+<p>I used to jump straight to `awk` for everything, because it can do what `cut` does and more. The habit I had to build was the opposite: default to the smallest tool that solves the actual problem, not the most powerful one available.</p>
+
+<h2>A Common Trap: Delimiter That Isn't There</h2>
+<pre><code>echo "no delimiter here" | cut -d: -f2</code></pre>
+<p>If a line doesn't contain the delimiter at all, `cut` prints the whole line back by default. This surprises people expecting an empty result. Add <code>-s</code> to suppress lines that don't contain the delimiter, if that's the behavior you actually want.</p>
+
+<h2>What This Tool Taught Me</h2>
+<p>1. Not every text problem needs a script. The instinct to open an editor and write a parser is often the slow path — the shell already has a tool for "give me this column," and it runs in milliseconds on files a script would take seconds to even load.</p>
+<p>2. Chaining beats complexity. Two simple `cut` calls piped together solved the IP-extraction problem faster and more readably than one clever regex would have.</p>
+<p>3. Pick the narrowest tool. `awk` can replace `cut`, `grep`, and half of `sed` — but reaching for it by default means writing more syntax than the problem needs. Match the tool to the job, not the job to your favorite tool.</p>
+
+<h2>Quick Reference</h2>
+<pre><code># By character position
+cut -c1-4 file.txt
+
+# By byte position
+cut -b1-10 file.txt
+
+# By field, custom delimiter
+cut -d: -f3 /etc/passwd
+cut -d',' -f1,3 data.csv
+cut -d',' -f2- data.csv
+
+# Combine non-contiguous ranges
+cut -c1-9,64- file.txt
+
+# Chain cut calls for multi-step extraction
+ip -o addr show | cut -d' ' -f7 | cut -d/ -f1
+
+# Suppress lines missing the delimiter
+cut -d: -f2 -s file.txt</code></pre>
+
+<h2>Final Thought</h2>
+<p>`cut` isn't glamorous. It won't show up in a highlight reel of impressive one-liners the way a `kill -9` moment might. But it's the tool I reach for almost daily now — quietly, without thinking about it — which is usually the real sign a command has earned a permanent spot in your terminal.</p>
 
             </div>
 
             <footer class="post-footer">
                 <a href="../index.html">← All Posts</a>
+                <a href="https://medium.com/@0x9z" target="_blank">Follow on Medium</a>
             </footer>
         </article>
     </main>
