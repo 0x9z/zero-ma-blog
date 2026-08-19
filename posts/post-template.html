@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The cut Command: A Linux Beginner's Complete Guide to Extracting Data Like a Pro — Zero's Blog</title>
-    <meta name="description" content="The cut Command: A Linux Beginner's Complete Guide to Extracting Data Like a Pro">
     <link rel="stylesheet" href="../blog.css">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 </head>
@@ -18,77 +16,102 @@
         <article class="post">
             <header class="post-header">
                 <h1>The cut Command: A Linux Beginner's Complete Guide to Extracting Data Like a Pro</h1>
-                
                 <div class="post-meta">
-                    <span class="date"></span>
-                    <span class="read-time">3 min read</span>
-                    <span class="author">by Zero</span>
+                    <span class="date">2026-10-03</span>
+                    <span class="author">by 0x9z</span>
                 </div>
-                
             </header>
 
             <div class="post-content">
-<img src="https://miro.medium.com/v2/resize:fill:34:34/1*rHUV4ADBJgTTdzR8mUnhGw.png" alt="Zero">
-<p>6</p>
-<p>Listen</p>
-<p>Share</p>
-<p>More</p>
-<img src="https://miro.medium.com/v2/resize:fit:750/1*Vn-JIPoXNmhiIB7kN3BVgQ.png" alt="">
-<p class="caption">The cut Command</p>
 <p>Imagine you have a file with thousands of lines. Each line has 10 columns of data. You only need column number 3.</p>
 <p>What do you do?</p>
 <p>A beginner opens the file, reads it manually, and copies what they need. A Linux user types one command and gets the job done in milliseconds.</p>
-<p>That command is cut.</p>
-<h2>What Exactly is cut?</h2>
+<p>That command is cut.
+What Exactly is cut?</p>
 <p>cut is a command-line tool that extracts specific sections from each line of a file or input. It's fast, lightweight, and incredibly powerful when combined with other commands.</p>
-<p>Think of it as scissors — but smarter. You tell it exactly where to cut, and it does it perfectly every time.</p>
-<h2>The 3 Core Flags You Must Know</h2>
+<p>Think of it as scissors — but smarter. You tell it exactly where to cut, and it does it perfectly every time.
+The 3 Core Flags You Must Know</p>
 <p>-d — The Delimiter</p>
 <p>A delimiter is the character that separates your data. In a CSV file, it’s a comma , In /etc/passwd, it's a colon : In a TSV file, it's a tab \t</p>
 <p>-f — The Field</p>
 <p>After defining your delimiter, you tell cut which column (field) you want. -f1 = first column -f2,4 = second AND fourth column -f1-3 = columns 1 through 3</p>
 <p>-c — The Character Position</p>
-<p>When your data has no delimiter, you extract by character position. -c1-5 = characters 1 to 5 from each line -c10 = only the 10th character</p>
-<h2>Real World Examples</h2>
+<p>When your data has no delimiter, you extract by character position. -c1-5 = characters 1 to 5 from each line -c10 = only the 10th character
+Real World Examples</p>
 <p>Example 1 — Extract all usernames from your system:</p>
 <p>Every Linux system stores users in /etc/passwd. Each line looks like this:</p>
-<pre><code>root:x:0:0:root:/root:/bin/bash</code></pre>
+<p>root:x:0:0:root:/root:/bin/bash</p>
 <p>To extract only the usernames (first field):</p>
-<pre><code>cut -d':' -f1 /etc/passwd```Output:```rootdaemonbinsysanas```</code></pre>
-<pre><code>Example 2 — Working with CSV files:</code></pre>
-<pre><code>You have a file `employees.csv`:```John,Developer,50000,New YorkSara,Designer,45000,LondonAhmed,SysAdmin,55000,Marrakesh</code></pre>
+<p>cut -d':' -f1 /etc/passwd
+```
+Output:
+```
+root
+daemon
+bin
+sys
+anas
+```</p>
+<p>Example 2 — Working with CSV files:</p>
+<p>You have a file `employees.csv`:
+```
+John,Developer,50000,New York
+Sara,Designer,45000,London
+Ahmed,SysAdmin,55000,Marrakesh</p>
 <p>Extract only names and cities (columns 1 and 4):</p>
 <p>bash</p>
-<pre><code>cut -d',' -f1,4 employees.csv```</code></pre>
-<pre><code>Output:```John,New YorkSara,LondonAhmed,Marrakesh```**Example 3 - Extract by character position:**You have a log file where the date is always the first 10 characters:```2024-03-04 ERROR: disk full2024-03-05 INFO: backup done</code></pre>
+<p>cut -d',' -f1,4 employees.csv
+```</p>
+<p>Output:
+```
+John,New York
+Sara,London
+Ahmed,Marrakesh
+```
+**Example 3 - Extract by character position:**
+You have a log file where the date is always the first 10 characters:
+```
+2024-03-04 ERROR: disk full
+2024-03-05 INFO: backup done</p>
 <p>Extract only the dates:</p>
-<pre><code>cut -c1-10 logfile.txt```Output:```2024-03-042024-03-05</code></pre>
-<h2>The Most Common Beginner Mistake</h2>
+<p>cut -c1-10 logfile.txt
+```
+Output:
+```
+2024-03-04
+2024-03-05</p>
+<p>The Most Common Beginner Mistake</p>
 <p>Almost every beginner writes this:</p>
-<pre><code>cat file.txt | cut -d':' -f1</code></pre>
-<p>This works. But it’s what Linux veterans call “Useless Use of Cat” 😄</p>
+<p>cat file.txt | cut -d':' -f1</p>
+<p>This works. But it’s what Linux veterans call “Useless Use of Cat” 😄
+Write on Medium</p>
 <p>You’re running two commands when one is enough.</p>
 <p>The correct and efficient way:</p>
-<pre><code>cut -d':' -f1 file.txt</code></pre>
-<p>Same result. Faster. Cleaner. More professional. ✅</p>
-<h2>Combining cut with Other Commands</h2>
+<p>cut -d':' -f1 file.txt</p>
+<p>Same result. Faster. Cleaner. More professional. ✅
+Combining cut with Other Commands</p>
 <p>This is where cut becomes truly powerful.</p>
 <p>With grep — find and extract:</p>
-<pre><code>grep 'anas' /etc/passwd | cut -d':' -f1,6</code></pre>
+<p>grep 'anas' /etc/passwd | cut -d':' -f1,6</p>
 <p>Find the user “anas” then extract their username and home directory.</p>
 <p>With sort — extract then sort:</p>
-<pre><code>cut -d',' -f2 employees.csv | sort</code></pre>
+<p>cut -d',' -f2 employees.csv | sort</p>
 <p>Extract the job titles and sort them alphabetically.</p>
 <p>With ps — extract process info:</p>
-<pre><code>ps aux | tr -s ' ' | cut -d' ' -f1,11</code></pre>
-<p>Extract usernames and their running commands.</p>
-<h2>Quick Reference Card</h2>
-<p>GoalCommandExtract field by delimitercut -d':' -f1 fileExtract multiple fieldscut -d',' -f1,3 fileExtract field rangecut -d':' -f1-3 fileExtract by charactercut -c1-10 fileCombine with grepgrep 'text' file | cut -d':' -f1</p>
-<h2>Practice Challenge 🔥</h2>
+<p>ps aux | tr -s ' ' | cut -d' ' -f1,11</p>
+<p>Extract usernames and their running commands.
+Quick Reference Card</p>
+<p>GoalCommandExtract field by delimitercut -d':' -f1 fileExtract multiple fieldscut -d',' -f1,3 fileExtract field rangecut -d':' -f1-3 fileExtract by charactercut -c1-10 fileCombine with grepgrep 'text' file | cut -d':' -f1
+Practice Challenge 🔥</p>
 <p>Try these yourself in your terminal:</p>
-<pre><code># Challenge 1cut -d':' -f1,7 /etc/passwd# Challenge 2ps aux | tr -s ' ' | cut -d' ' -f1 | sort | uniq# Challenge 3 - what does this do?cut -d':' -f1-4 /etc/passwd | head -5</code></pre>
-<p>Drop your answers in the comments 👇</p>
-<h2>Final Thought</h2>
+<h1>Challenge 1
+cut -d':' -f1,7 /etc/passwd</h1>
+<h1>Challenge 2
+ps aux | tr -s ' ' | cut -d' ' -f1 | sort | uniq</h1>
+<h1>Challenge 3 - what does this do?
+cut -d':' -f1-4 /etc/passwd | head -5</h1>
+<p>Drop your answers in the comments 👇
+Final Thought</p>
 <p>cut is simple. But mastering simple tools is what separates a real Linux SysAdmin from someone who just knows commands.</p>
 <p>Every expert was once a beginner who took the time to understand the basics deeply.</p>
 <p>Start with cut. Go deep. Then move forward.</p>
@@ -99,7 +122,6 @@
 
             <footer class="post-footer">
                 <a href="../index.html">← All Posts</a>
-                <a href="https://medium.com/@0x9z" target="_blank">Follow on Medium</a>
             </footer>
         </article>
     </main>
