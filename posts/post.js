@@ -15,16 +15,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const headerHTML = `
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="https://blog.zero.ma" class="nav-brand">
+            <a href="https://zero.ma" class="nav-brand">
                 <span class="brand-icon">Z</span>
                 <span class="brand-text">Zero</span>
             </a>
             <div class="nav-menu" id="nav-menu">
                 <a href="https://zero.ma" class="nav-link">Home</a>
-                <a href="https://blog.zero.ma" class="nav-link active">Blog</a>
                 <a href="https://zero.ma/#skills" class="nav-link">Skills</a>
                 <a href="https://zero.ma/#projects" class="nav-link">Projects</a>
                 <a href="https://zero.ma/#contact" class="nav-link">Contact</a>
+                <a href="https://blog.zero.ma" class="nav-link active">Blog</a>
             </div>
             <div class="nav-controls">
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p class="footer-text">I learn by doing — one command at a time.</p>
                 <nav class="footer-links">
                     <a href="https://zero.ma">Home</a>
-                    <a href="https://blog.zero.ma">Blog</a>
                     <a href="https://zero.ma/#contact">Contact</a>
+                    <a href="https://blog.zero.ma">Blog</a>
                 </nav>
             </div>
             <div class="footer-bottom">
