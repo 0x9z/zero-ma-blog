@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Killed Firefox From the Terminal — And It Changed How I Think About Linux — Zero's Blog</title>
+    <meta name="description" content="I Killed Firefox From the Terminal — And It Changed How I Think About Linux">
+    <link rel="stylesheet" href="../blog.css">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <header class="site-header">
+        <a href="../index.html" class="back-link">← Back to Blog</a>
+    </header>
+
+    <main class="container">
+        <article class="post">
+            <header class="post-header">
+                <h1>I Killed Firefox From the Terminal — And It Changed How I Think About Linux</h1>
+                
+                <div class="post-meta">
+                    <span class="date"></span>
+                    <span class="read-time">4 min read</span>
+                    <span class="author">by Zero</span>
+                </div>
+                
+            </header>
+
+            <div class="post-content">
+<img src="https://miro.medium.com/v2/resize:fill:34:34/1*rHUV4ADBJgTTdzR8mUnhGw.png" alt="Zero">
+<p>116</p>
+<p>1</p>
+<p>Listen</p>
+<p>Share</p>
+<p>More</p>
+<img src="https://miro.medium.com/v2/resize:fit:750/1*udUzwTFbJXC65xcrqMNOjw.png" alt="">
+<p class="caption">The ps Command</p>
+<p>Firefox opened 47 windows at once.</p>
+<p>I didn’t reach for the mouse.</p>
+<p>I opened the terminal — and that split-second decision taught me more about Linux than weeks of reading documentation.</p>
+<p>Let me show you exactly what I did, why it worked, and what it reveals about how Linux actually thinks.</p>
+<h2>The Incident</h2>
+<p>I was exploring RedHat’s RSS feed — curious Linux nerd moment — when I accidentally opened the file directly in Firefox instead of a feed reader. The browser went into a loop. Windows kept spawning. The system slowed down.</p>
+<p>Normal people would click X forty-seven times, or worse, force-restart the machine.</p>
+<p>I opened the terminal.</p>
+<h2>Step 1: Find the Process</h2>
+<pre><code>ps aux | grep firefox</code></pre>
+<p>Output:</p>
+<pre><code>user    8585  45.2  8.1 2847392 334812 ?  Sl  14:23  3:12 /usr/lib/firefox/firefoxuser    8612   0.0  0.0   6432   720 pts/0  S+  14:26  0:00 grep --color=auto firefox</code></pre>
+<p>Let’s break down what ps aux actually shows you:</p>
+<p>Column Meaning USER Who owns the process PID Process ID — the unique number we need %CPU How much CPU it’s consuming %MEM Memory usage COMMAND What’s actually running</p>
+<p>The important number here is the PID: 8585.</p>
+<p>Notice the second line? That’s the grep command itself showing up. Ignore it — its PID is different and it'll disappear in a second anyway.</p>
+<h2>Step 2: Kill It</h2>
+<pre><code>kill -9 8585</code></pre>
+<p>Boom. Firefox gone instantly.</p>
+<p>But what does -9 actually mean?</p>
+<h2>Understanding Linux Signals</h2>
+<p>When you run kill, you're not "deleting" a process. You're sending it a signal — a message from the kernel.</p>
+<p>Linux has 64 signals. Here are the ones you’ll actually use:</p>
+<p>Signal Number Meaning SIGTERM 15 “Please stop when you’re ready” SIGKILL 9 “Stop. Now. No questions.” SIGHUP 1 “Reload your configuration” SIGSTOP 19 “Pause” SIGCONT 18 “Resume”</p>
+<pre><code>kill -15 8585   # Polite request to terminatekill -9 8585    # Forced termination — no cleanupkill -1 8585    # Reload config (useful for daemons)</code></pre>
+<p>Why did I use -9 instead of -15?</p>
+<p>Because Firefox was frozen. A frozen process ignores SIGTERM — it can’t respond to polite requests. SIGKILL bypasses the process entirely and goes straight to the kernel. The kernel removes it from memory immediately.</p>
+<p>Think of it this way:</p>
+<ul>
+<li>SIGTERM = “Hey, can you leave?”</li>
+<li>SIGKILL = The kernel physically removes the process from existence</li>
+</ul><h2>A Smarter Way: pgrep and pkill</h2>
+<p>Typing ps aux | grep firefox works, but there's a cleaner approach:</p>
+<pre><code># Find the PID without greppgrep firefox# Kill by name directly - no PID neededpkill firefox# Kill forcefully by namepkill -9 firefox</code></pre>
+<p>pkill combines the search and the kill into one command. Much cleaner.</p>
+<h2>Going Deeper: Where Does Linux Store Process Info?</h2>
+<p>Here’s what most tutorials skip:</p>
+<p>Everything ps shows you comes from a special directory called /proc.</p>
+<pre><code>ls /proc/8585</code></pre>
+<p>Output:</p>
+<pre><code>cmdline  environ  fd  maps  mem  net  root  stat  status  ...</code></pre>
+<p>Every running process gets its own folder in /proc named after its PID. Inside that folder, Linux stores everything about that process — open files, memory maps, environment variables, and more.</p>
+<p>Try this:</p>
+<pre><code>cat /proc/8585/status</code></pre>
+<p>You’ll see the process name, its state (running/sleeping/zombie), memory usage, and the user who owns it.</p>
+<p>When the process dies, its /proc/[PID] folder disappears instantly. The kernel manages this automatically.</p>
+<h2>What This Moment Taught Me</h2>
+<p>1. The terminal gives you access to layers the GUI hides. A frozen Firefox is helpless against kill -9. The mouse is useless. The terminal talks directly to the kernel.</p>
+<p>2. Every process is just a number. Once you understand PIDs, you stop seeing “programs” and start seeing processes. This is how SysAdmins think.</p>
+<p>3. Linux is transparent by design. The /proc filesystem means nothing is hidden from you. Your system is an open book if you know where to look.</p>
+<p>4. Instinct comes from practice, not memorization. I didn’t look up kill -9. It just came to me. That only happens when you use the terminal daily, not just when you study it.</p>
+<h2>Quick Reference</h2>
+<pre><code># See all running processesps aux# Find a specific processps aux | grep firefoxpgrep firefox# Kill by PIDkill -9 [PID]# Kill by namepkill -9 firefox# List all available signalskill -l# Explore process detailsls /proc/[PID]cat /proc/[PID]/status</code></pre>
+<h2>Final Thought</h2>
+<p>I’m currently working toward my LPIC-1 certification. Days like this remind me that the best Linux lessons don’t come from textbooks — they come from moments when something breaks and you decide to fix it the right way.</p>
+<p>The terminal isn’t just a tool. It’s a completely different way of seeing your system.</p>
+<p>Next time something crashes on your machine — open the terminal first.</p>
+<p>What was your first “I can’t believe I just did that from the terminal” moment? I’d love to hear it in the comments.</p>
+
+            </div>
+
+            <footer class="post-footer">
+                <a href="../index.html">← All Posts</a>
+                <a href="https://medium.com/@0x9z" target="_blank">Follow on Medium</a>
+            </footer>
+        </article>
+    </main>
+</body>
+</html>
