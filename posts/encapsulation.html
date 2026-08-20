@@ -17,132 +17,78 @@
         <article class="post">
             <header class="post-header">
                 <h1>I Watched a Message Get Wrapped and Unwrapped — And Finally Understood Encapsulation</h1>
-                
+
                 <div class="post-meta">
                     <span class="date"></span>
                     <span class="read-time">5 min read</span>
                     <span class="author">by Zero</span>
                 </div>
-                
+
             </header>
 
             <div class="post-content">
-<img src="https://miro.medium.com/v2/resize:fill:34:34/1*rHUV4ADBJgTTdzR8mUnhGw.png" alt="Zero">
-<p>Listen</p>
-<p>Share</p>
-<p>More</p>
-<p>You send a message to your friend.</p>
-<p>“Hey, wanna grab coffee?”</p>
-<p>Simple, right?</p>
-<p>But behind the scenes, that message gets wrapped in layers — like putting a letter in an envelope, then that envelope in a shipping box, then that box on a truck.</p>
-<p>That’s encapsulation.</p>
-<p>Then your friend receives it and unwraps everything.</p>
-<p>That’s de-encapsulation.</p>
-<p>Let me show you exactly how it works.</p>
-<h2>What Is Encapsulation?</h2>
-<p>Encapsulation is the process of adding headers (wrappers) to data as it moves down the OSI or TCP/IP model.</p>
-<p>Each layer adds its own information so the receiving device knows how to handle it.</p>
-<p>Think of it like mailing a gift:</p>
-<p>Step 1 — You write a letter. That’s the actual data at the Application layer.</p>
-<p>Step 2 — You put the letter in an envelope. That’s the Transport layer adding port numbers (TCP/UDP).</p>
-<p>Step 3 — You write the address on the envelope. That’s the Network layer adding source and destination IPs.</p>
-<p>Step 4 — You put the envelope inside a shipping box. That’s the Data Link layer adding source and destination MACs.</p>
-<p>Step 5 — You hand the box to the delivery driver. That’s the Physical layer sending the bits as signals.</p>
-<p>That last step is the actual transmission — the truck on the road.</p>
-<h2>Step-by-Step: How Encapsulation Works</h2>
-<p>Let’s say PC1 (192.168.1.1) sends a ping to PC2 (192.168.1.2).</p>
-<p>Step 1 — Application Layer (Layer 7)The ping command creates the raw data. Just the message “hey, are you there?”</p>
-<p>Step 2 — Transport Layer (Layer 4)The data gets wrapped with a TCP or UDP header. This header contains:</p>
-<ul>
-<li>Source port (random number like 50000)</li>
-<li>Destination port (for ping, it’s usually port 7 or 8)</li>
-</ul><p>Now we call it a segment.</p>
-<p>Step 3 — Network Layer (Layer 3)The segment gets wrapped with an IP header. This header contains:</p>
-<ul>
-<li>Source IP: 192.168.1.1</li>
-<li>Destination IP: 192.168.1.2</li>
-</ul><p>Now we call it a packet.</p>
-<p>Step 4 — Data Link Layer (Layer 2)The packet gets wrapped with an Ethernet header (MAC addresses). This header contains:</p>
-<ul>
-<li>Source MAC: AA:BB:CC:DD:EE:11</li>
-<li>Destination MAC: AA:BB:CC:DD:EE:22</li>
-</ul><p>Now we call it a frame.</p>
-<p>Step 5 — Physical Layer (Layer 1)The frame (just 0s and 1s now) gets sent as electrical signals, light pulses, or radio waves through the cable.</p>
-<h2>The Big Picture of Encapsulation</h2>
-<pre><code>Data (Layer 7)    ↓[TCP/UDP header + Data]  ← Segment (Layer 4)    ↓[IP header + TCP/UDP header + Data]  ← Packet (Layer 3)    ↓[MAC header + IP header + TCP/UDP header + Data + MAC trailer]  ← Frame (Layer 2)    ↓Bits sent as signals (Layer 1)</code></pre>
-<p>Each layer adds something to the front (header) and sometimes the end (trailer).</p>
-<p>The data keeps growing as it goes down.</p>
-<h2>What Is De-Encapsulation?</h2>
-<p>De-encapsulation is the reverse process.</p>
-<p>When the receiving device gets the bits, it works from Layer 1 up to Layer 7, removing each header as it goes.</p>
-<p>Think of it like opening that gift:</p>
-<p>Step 1 — The delivery driver hands you the box. That’s the Physical layer receiving signals.</p>
-<p>Step 2 — You look at the shipping label. It has the MAC addresses. That’s the Data Link layer reading and removing the MAC header.</p>
-<p>Step 3 — You open the box and find an envelope inside. On the envelope are the IP addresses. That’s the Network layer reading and removing the IP header.</p>
-<p>Step 4 — You open the envelope and find a letter. The letter has port numbers on it. That’s the Transport layer reading and removing the TCP/UDP header.</p>
-<p>Step 5 — You read the letter. That’s the Application layer getting the original data.</p>
-<h2>Step-by-Step: How De-Encapsulation Works</h2>
-<p>PC2 receives the bits from PC1.</p>
-<p>Step 1 — Physical Layer (Layer 1)PC2 receives electrical signals. It converts them back into 0s and 1s (a frame).</p>
-<p>Step 2 — Data Link Layer (Layer 2)PC2 reads the MAC header. It checks:</p>
-<ul>
-<li>“Is this MAC address mine?”</li>
-<li>If yes → removes the MAC header and trailer</li>
-<li>Passes the remaining data (packet) up to Layer 3</li>
-</ul><p>Step 3 — Network Layer (Layer 3)PC2 reads the IP header. It checks:</p>
-<ul>
-<li>“Is this IP address mine?”</li>
-<li>If yes → removes the IP header</li>
-<li>Passes the remaining data (segment) up to Layer 4</li>
-</ul><p>Step 4 — Transport Layer (Layer 4)PC2 reads the TCP/UDP header. It checks:</p>
-<ul>
-<li>“Which application should get this data?”</li>
-<li>Removes the TCP/UDP header</li>
-<li>Passes the remaining data (raw data) up to Layer 7</li>
-</ul><p>Step 5 — Application Layer (Layer 7)PC2 gets the original data: “hey, are you there?”</p>
-<p>PC2 responds with a reply, and the whole process repeats.</p>
-<h2>The Big Picture of De-Encapsulation</h2>
-<pre><code>Bits received from cable (Layer 1)    ↓Frame → MAC header removed (Layer 2)    ↓Packet → IP header removed (Layer 3)    ↓Segment → TCP/UDP header removed (Layer 4)    ↓Data (Layer 7) ← Original message</code></pre>
-<p>Each layer removes its own header and passes the rest up.</p>
-<p>The data keeps shrinking as it goes up.</p>
-<h2>Encapsulation + De-Encapsulation = Communication</h2>
-<p>Here’s the full cycle:</p>
-<pre><code>PC1                                    PC2</code></pre>
-<pre><code>Data (Hi!)                                 ↓                                   Segment (adds ports)                       ↓                                   Packet (adds IPs)                          ↓                                   Frame (adds MACs)                          ↓                                   Bits (sent over cable)  ──────────→   Bits (received)                                       ↓                                    Frame (remove MAC)                                       ↓                                    Packet (remove IP)                                       ↓                                    Segment (remove ports)                                       ↓                                    Data (Hi!)</code></pre>
-<h2>See It Yourself in Packet Tracer</h2>
-<ol>
-<li>Open Packet Tracer</li>
-<li>Put two PCs on a switch</li>
-<li>Give them IPs: 192.168.1.1 and 192.168.1.2</li>
-<li>Go to Simulation mode (bottom right)</li>
-<li>Ping from PC1 to PC2</li>
-<li>Click on the envelope as it travels</li>
-</ol><p>You will see:</p>
-<ul>
-<li>On PC1: Data → Segment → Packet → Frame → Bits (data gets bigger)</li>
-<li>On the wire: The frame traveling</li>
-<li>On PC2: Bits → Frame → Packet → Segment → Data (data gets smaller)</li>
-</ul><p>That’s Encapsulation and De-encapsulation live.</p>
-<h2>Quick Reference:</h2>
-<p>Encapsulation (Sender):</p>
-<pre><code>Data → Segment → Packet → Frame → Bits</code></pre>
-<p>De-encapsulation (Receiver):</p>
-<pre><code>Bits → Frame → Packet → Segment → Data</code></pre>
-<p>Remember:</p>
-<ul>
-<li>Going DOWN = ADDING wrappers (Encapsulation)</li>
-<li>Going UP = REMOVING wrappers (De-encapsulation)</li>
-</ul><h2>What This Taught Me</h2>
-<p>1. Data doesn’t travel alone.It carries instructions with it — like a package with shipping labels. Every router and switch reads only the layer it needs.</p>
-<p>2. Encapsulation and de-encapsulation happen every time.Every single packet you send — a Google search, a YouTube video, a text message — goes through this process.</p>
-<p>3. The OSI model is a roadmap.Encapsulation shows you how the layers actually work together, not just their names.</p>
-<p>4. Packet Tracer makes it visible.You can literally watch the data grow and shrink. That’s the best way to learn it.</p>
-<p>Final thought:</p>
-<p>Encapsulation is just wrapping gifts for shipment.</p>
-<p>De-encapsulation is just unwrapping them at the door.</p>
-<p>The internet works because every device agrees on how to wrap and unwrap.</p>
-<p>Next time your message reaches someone in seconds — remember the invisible wrapping and unwrapping happening behind the scenes.</p>
-<p>What was your “aha” moment with encapsulation? Drop it in the comments.</p>
+
+<p>I typed one line into a chat window in Packet Tracer — "hello" — and hit send.</p>
+<p>Then I put the simulation into slow motion and watched what actually happened between that click and the packet arriving on the other PC.</p>
+<p>Five layers took my five-letter word and buried it under so much wrapping that by the time it hit the wire, "hello" was the smallest part of the whole thing. That's the moment encapsulation stopped being a diagram I'd memorized for an exam and became something I actually understood.</p>
+
+<h2>The Word Everyone Defines Wrong</h2>
+<p>Most explanations say "encapsulation is when data gets wrapped in headers as it goes down the OSI layers." True, but it doesn't tell you why, or what's actually inside each wrapper. Watching it happen one layer at a time fixed that.</p>
+
+<h2>Layer 7 — The Message Itself</h2>
+<p>At the top, there's just data. My "hello" was, at this point, exactly what it looked like — plain text, no headers, no addressing, nothing. This is what the Application layer hands down: the actual thing you're trying to say.</p>
+
+<h2>Layer 4 — Wrapped in a Segment</h2>
+<p>The Transport layer took that data and wrapped it in a TCP segment. This is where port numbers get added — source port and destination port — so that when the data eventually arrives, the receiving machine knows which application should get it.</p>
+<pre><code>[ TCP Header: src port 51423, dst port 80 ][ "hello" ]</code></pre>
+<p>Notice what's missing: no IP address yet. TCP doesn't know or care how the segment gets there — only which process on which end is talking to which.</p>
+
+<h2>Layer 3 — Wrapped in a Packet</h2>
+<p>Next, the Network layer wraps the segment inside an IP packet, adding source and destination IP addresses.</p>
+<pre><code>[ IP Header: src 192.168.1.10, dst 192.168.1.20 ][ TCP Header ][ "hello" ]</code></pre>
+<p>Now the data knows where it's going, in the addressing sense — which host, on which network. Still no idea how it physically gets there, though. That's the next layer's job.</p>
+
+<h2>Layer 2 — Wrapped in a Frame</h2>
+<p>The Data Link layer wraps the packet in a frame, adding source and destination MAC addresses — plus a trailer at the end for error checking.</p>
+<pre><code>[ Frame Header: src MAC, dst MAC ][ IP Header ][ TCP Header ][ "hello" ][ Frame Trailer: FCS ]</code></pre>
+<p>This is the layer that matters for the immediate next hop only — the MAC address gets swapped at every hop along the path, while the IP addresses stay the same for the whole journey. That distinction alone explained half of my early routing confusion.</p>
+
+<h2>Layer 1 — Turned Into Bits</h2>
+<p>Finally, the Physical layer converts the entire frame into electrical signals, light pulses, or radio waves — 1s and 0s traveling down a cable or through the air. Nothing left to wrap. This is the wire-level reality of everything above it.</p>
+
+<h2>What "Encapsulation" Actually Means</h2>
+<p>Every layer above wraps the layer below it in a new header — sometimes a trailer too — without touching what's already inside. TCP never looks inside your message. IP never looks inside the TCP segment. Each layer trusts the one above it and adds exactly one layer of wrapping, like nested envelopes, each addressed for a different purpose:</p>
+<pre><code>Application data:  hello
+Transport (TCP):   [ports]        + [hello]
+Network (IP):      [IP addresses] + [TCP segment]
+Data Link (Frame):  [MAC addresses] + [IP packet] + [trailer]
+Physical:            bits on the wire</code></pre>
+
+<h2>De-encapsulation: The Same Process in Reverse</h2>
+<p>On the receiving end, the exact same thing happens backward. The frame arrives as bits, gets reassembled, the Data Link header and trailer get stripped off, then the IP header, then the TCP header — each layer unwrapping exactly one envelope and handing what's left to the layer above.</p>
+<pre><code>Bits arrive
+  → Physical reassembles them into a frame
+  → Data Link strips frame header/trailer, passes packet up
+  → Network strips IP header, passes segment up
+  → Transport strips TCP header, passes data up
+  → Application receives: hello</code></pre>
+<p>By the time "hello" reaches the application on the other PC, every wrapper has been removed in the exact reverse order it was added. Nothing gets skipped, nothing gets reordered.</p>
+
+<h2>Why This Matters Beyond the Exam</h2>
+<p>1. It explains what a "header" actually is. Not an abstract diagram box — a real, specific piece of data (ports, addresses, checksums) added at a specific layer for a specific reason.</p>
+<p>2. It explains why changing one layer doesn't break another. NAT can rewrite an IP header without touching the TCP segment inside it. A switch can rewrite MAC addresses at every hop without ever touching the IP packet. Each layer's wrapping is independent of what's inside it — that separation is the entire point of the model.</p>
+<p>3. It explains what a packet capture is actually showing you. Open Wireshark on any frame and you're looking at exactly this — nested headers, one inside another, in the same order they were added. The OSI model stops being theory the moment you see it as a literal structure sitting in a capture file.</p>
+
+<h2>Quick Reference</h2>
+<pre><code>Layer 7  Application   Data
+Layer 4  Transport     [TCP/UDP header] + Data           = Segment
+Layer 3  Network       [IP header] + Segment              = Packet
+Layer 2  Data Link     [Frame header + trailer] + Packet  = Frame
+Layer 1  Physical      Frame as bits/signals on the wire</code></pre>
+
+<h2>Final Thought</h2>
+<p>I'd read the OSI model a dozen times before this. It never stuck until I watched one specific "hello" get wrapped five times on the way out and unwrapped five times on the way in, inside a simulator, at a speed I could actually follow.</p>
+<p>If encapsulation still feels abstract, stop reading definitions of it. Open Packet Tracer or Wireshark, send one message, and watch what's actually stacked on top of it. It only needs to click once.</p>
 
             </div>
 
