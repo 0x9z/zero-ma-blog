@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I watched a packet get lost in my home network, and it changed how I think about the Internet! — Zero's Blog</title>
-    <meta name="description" content="I watched a packet get lost in my home network, and it changed how I think about the Internet!">
+    <title>I Watched a Packet Get Lost in My Home Network, and It Changed How I Think About the Internet — Zero's Blog</title>
+    <meta name="description" content="I watched a packet get lost in my home network, and it changed how I think about the Internet">
     <link rel="stylesheet" href="../blog.css">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 </head>
@@ -16,55 +16,88 @@
     <main class="container">
         <article class="post">
             <header class="post-header">
-                <h1>I watched a packet get lost in my home network, and it changed how I think about the Internet!</h1>
-                
+                <h1>I Watched a Packet Get Lost in My Home Network, and It Changed How I Think About the Internet</h1>
+
                 <div class="post-meta">
                     <span class="date"></span>
-                    <span class="read-time">4 min read</span>
+                    <span class="read-time">5 min read</span>
                     <span class="author">by Zero</span>
                 </div>
-                
+
             </header>
 
             <div class="post-content">
-<img src="https://miro.medium.com/v2/resize:fill:34:34/1*rHUV4ADBJgTTdzR8mUnhGw.png" alt="Zero">
-<p>Listen</p>
-<p>Share</p>
-<p>More</p>
-<img src="https://miro.medium.com/v2/resize:fit:750/1*r7r6Fx1UH8DPS2kzNa9kZA.png" alt="">
-<p class="caption">I watched a packet get lost in my home network, and it changed how I think about the Internet.</p>
-<h2>I watched a packet get lost in my home network, and it changed how I think about the Internet.</h2>
-<p>The screen flickered. My terminal was staring back at me, mocking my incompetence.</p>
-<p>I was sitting in my home lab, trying to get two containers to talk to each other across a switch. I typed ping 192.168.1.15. Nothing. Request timed out.</p>
-<p>I checked the cables. I checked the IP configuration. I re-checked the subnet mask. Everything looked textbook, yet the bytes weren’t moving. I felt that specific, burning frustration every sysadmin knows: the feeling that the laws of physics — or at least the laws of networking — had suddenly decided to take a day off.</p>
-<p>That was the moment I stopped looking at the screen and started looking at the protocol. I didn’t just want the ping to work; I wanted to see the ghost in the machine.</p>
-<h2>The Silent Handshake: Unmasking ARP</h2>
-<p>I realized I was treating the network like a magic black box. I knew IP addresses were the “names” of the devices, but I forgot that, at the data link layer, computers are essentially illiterate. They don’t know IPs; they know MAC addresses.</p>
-<p>I dove into the ARP (Address Resolution Protocol) table on my host.</p>
-<pre><code># Check the current ARP cachearp -a</code></pre>
-<p>Watching the entries populate — and fail to populate — was like watching a detective try to find a suspect in a crowded room. When I pinged the device, my computer didn’t just fire off a packet. It shouted into the void: “Who has 192.168.1.15? Tell 192.168.1.10.”</p>
-<p>This is the Broadcast storm I’d read about in my CCNA studies, but seeing it in the terminal made it real. The ARP request is a desperate, loud broadcast sent to every single port on the switch. If the MAC address isn’t in the cache, the network literally pauses to introduce everyone.</p>
-<h2>The Switch: The Unsung Librarian</h2>
-<p>Once I understood ARP, I started looking at my switch differently. I used to think of it as a dumb power strip for data. I was wrong.</p>
-<p>A switch is a librarian with a very specific, high-speed index. Every time a frame enters a port, the switch looks at the source MAC address and records it in its MAC Address Table (or CAM table).</p>
-<ul>
-<li>Learning: “Oh, Device A is on Port 1.”</li>
-<li>Forwarding: “Oh, you want to talk to Device A? I know exactly which door to open.”</li>
-</ul><p>When I pinged my container, the switch wasn’t just passing data; it was updating its internal map. If the switch doesn’t know where the destination is, it acts like a hub and broadcasts. If it does know, it performs a Unicast — a private conversation between two points. I was failing because my switch’s table and my ARP cache were out of sync. A simple clear arp and a port reset later, and the replies finally started flooding the screen.</p>
-<h2>Ping: More Than Just a Connection Check</h2>
-<p>Finally, I looked at the ping command with new eyes. It’s not just a "Are you there?" signal. It’s an ICMP (Internet Control Message Protocol) echo request.</p>
-<p>It’s the most honest tool in an engineer’s arsenal. When I type ping, I’m testing the entire stack:</p>
-<ol>
-<li>Layer 2: Can I resolve the MAC address via ARP?</li>
-<li>Layer 3: Is my routing correct?</li>
-<li>Layer 4–7: Is the host actually listening?</li>
-</ol><p>Every successful ping is a confirmation that the ARP resolution worked, the switch correctly mapped the destination, and the host was polite enough to respond.</p>
-<h2>The Takeaway: It’s Not Magic, It’s Logic</h2>
-<p>That afternoon of debugging taught me more about networking than any practice exam ever could.</p>
-<p>As an aspiring SysAdmin, I used to panic when a connection failed. Now, I start with the handshake. I ask: Is the ARP entry there? Does the switch know the MAC? Is the broadcast hitting the right port?</p>
-<p>Networking isn’t about memorizing protocols; it’s about understanding the conversation. The next time you find yourself staring at a “Request Timed Out” error, don’t just restart the device. Open the terminal, look at the ARP table, and watch the network do its job. It’s not magic — it’s just a very organized, very fast, and occasionally very loud conversation.</p>
-<p>And honestly? That’s exactly why I love this field.</p>
-<p>→ALSO READ : I killed Firefox from the terminal and it changed how I think about Linux.</p>
+
+<p>Request timed out.</p>
+<p>Four words, and my ping to a site outside my network just stopped replying — while a ping to my router, one hop away, worked fine. Somewhere between my laptop and the rest of the internet, a packet had left and never come back.</p>
+<p>I didn't restart the router. I opened the terminal and started asking the network exactly where things were going wrong.</p>
+
+<h2>Step 1: Confirm It's Actually Loss</h2>
+<pre><code>ping 8.8.8.8</code></pre>
+<p>Output:</p>
+<pre><code>64 bytes from 8.8.8.8: icmp_seq=1 ttl=118 time=14.2 ms
+Request timeout for icmp_seq=2
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=118 time=15.8 ms
+Request timeout for icmp_seq=4</code></pre>
+<p>Not a total outage — intermittent. Every other packet was making it, and every other one was vanishing. That pattern matters: total failure usually means something is down; intermittent loss usually means something is struggling.</p>
+
+<h2>Step 2: Find Where It's Actually Happening</h2>
+<p>A ping only tells you loss exists — not where. For that, I needed to see every hop along the way.</p>
+<pre><code>traceroute 8.8.8.8</code></pre>
+<p>Output (trimmed):</p>
+<pre><code> 1  192.168.1.1        1.2 ms   1.1 ms   1.3 ms
+ 2  10.10.4.1          8.4 ms   *        9.1 ms
+ 3  41.202.x.x         14.6 ms  15.0 ms  *
+ 4  8.8.8.8             14.2 ms  15.8 ms  14.9 ms</code></pre>
+<p>Each numbered line is a hop — a router the packet passes through on its way out. The asterisks (*) mark a probe that got no reply. Hop 2, my ISP's local gateway, was where the pattern started. That's the moment this stopped being "the internet is broken" and became "one specific device between me and the internet is dropping packets."</p>
+
+<h2>What traceroute Is Actually Doing</h2>
+<p>This is the part that changed how I see the whole path. `traceroute` doesn't have some special way of "seeing" the route. It exploits a single field in every IP packet: TTL — Time To Live.</p>
+<p>Every packet's TTL starts at some number (commonly 64 or 128) and gets decremented by 1 at every router hop. When TTL hits 0, the router drops the packet and sends back an ICMP "Time Exceeded" message to the sender.</p>
+<pre><code>traceroute sends a packet with TTL=1
+  -> first router drops it, replies "time exceeded" -> that's hop 1
+
+traceroute sends a packet with TTL=2
+  -> passes hop 1, second router drops it, replies -> that's hop 2
+
+traceroute sends a packet with TTL=3
+  -> passes hop 1 and 2, third router drops it, replies -> that's hop 3
+  ...and so on, until TTL is high enough to reach the destination</code></pre>
+<p>`traceroute` is deliberately causing packets to expire, one hop further each time, and mapping the path from whoever complains. It's not asking the network "what's your route" — it's provoking every router along the way into revealing itself.</p>
+
+<h2>Reading the Result</h2>
+<p>Hop 1 (my own router) — clean, no loss. Hop 2 (ISP gateway) — intermittent asterisks. Hop 3 — intermittent too. Hop 4 (destination) — fine when it arrived at all.</p>
+<p>Loss that starts at one hop and continues through every hop after it usually means the problem lives at that first lossy hop — later hops are just relaying the same already-degraded path, not independently failing on their own.</p>
+
+<h2>Confirming It Wasn't My Own Network</h2>
+<pre><code>ping 192.168.1.1   # my own router — clean, 0% loss
+ping 10.10.4.1     # ISP gateway — intermittent loss</code></pre>
+<p>My side of the connection — router, Wi-Fi, local switch — was fine. The loss started exactly at the first hop outside my control. That distinction mattered: no amount of restarting my own router was going to fix a problem sitting upstream of it.</p>
+
+<h2>Why a Single Lost Packet Isn't Usually a Crisis</h2>
+<p>TCP — the protocol behind most of what you do online — expects some loss and recovers from it automatically. Every TCP segment is acknowledged; if an acknowledgment doesn't arrive in time, the sender retransmits. A few percent packet loss on a ping often means a slightly slower page load, not a broken connection — you rarely notice it directly.</p>
+<p>UDP-based traffic — video calls, some games — has no such safety net built into the protocol itself, which is exactly why intermittent loss shows up as stutters and dropped audio there long before it's visible anywhere else.</p>
+
+<h2>What This Moment Taught Me</h2>
+<p>1. "The internet is slow" is a symptom, not a diagnosis. Ping tells you loss exists. Traceroute tells you where. Without both, you're guessing at a problem that has an exact, findable location.</p>
+<p>2. TTL isn't just a header field — it's a tool. I'd seen TTL in packet captures dozens of times as background noise. Watching `traceroute` weaponize it to map an entire path was the moment it stopped being trivia and became something I actually understood the purpose of.</p>
+<p>3. Packet loss is normal; the question is where and how much. Networks aren't perfect pipes. The internet is a chain of independent routers doing their best, and TCP was built assuming exactly that.</p>
+
+<h2>Quick Reference</h2>
+<pre><code># Check for loss to a destination
+ping 8.8.8.8
+
+# Map the path and find where loss starts
+traceroute 8.8.8.8
+
+# Confirm your own network is clean first
+ping &lt;your router's IP&gt;
+
+# Windows equivalent of traceroute
+tracert 8.8.8.8</code></pre>
+
+<h2>Final Thought</h2>
+<p>A lost packet used to just mean "the internet glitched" to me. Now it means: open a terminal, ping to confirm it's real, traceroute to find where, and ping each side of that hop to narrow it down further. The internet isn't one thing that's either working or broken — it's dozens of routers in sequence, each one capable of dropping a packet on its own, and TTL is how you go find out which one did.</p>
 
             </div>
 
