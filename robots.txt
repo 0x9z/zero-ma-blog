@@ -1,0 +1,287 @@
+# ============================================
+# ZERO.MA — ADVANCED ROBOTS.TXT
+# ============================================
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Block sensitive paths (nothing sensitive here, but good practice)
+Disallow: /assets/
+Disallow: /private/
+Disallow: /admin/
+
+# ============================================
+# AI CRAWLERS (Allow all to index)
+# ============================================
+
+# OpenAI - ChatGPT
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+# OpenAI - Search
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 1
+
+# Anthropic - Claude
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 1
+
+# Claude Web
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 1
+
+# Google - Gemini/AI
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 1
+
+# Google - Bard
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-News
+Allow: /
+Crawl-delay: 1
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+# You.com
+User-agent: YouBot
+Allow: /
+Crawl-delay: 1
+
+# Bing - Copilot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: BingPreview
+Allow: /
+Crawl-delay: 1
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: meta-externalagent
+Allow: /
+Crawl-delay: 1
+
+# Apple - Siri/Spotlight
+User-agent: Applebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Applebot-Extended
+Allow: /
+Crawl-delay: 1
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+Crawl-delay: 1
+
+# Common Crawl (used by many AI models)
+User-agent: CCBot
+Allow: /
+Crawl-delay: 1
+
+# ============================================
+# SEARCH ENGINES
+# ============================================
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Mobile
+Allow: /
+Crawl-delay: 1
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: MSNBot
+Allow: /
+Crawl-delay: 1
+
+# Yahoo
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckGo-Favicons-Bot
+Allow: /
+Crawl-delay: 1
+
+# Baidu
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+# ============================================
+# SOCIAL MEDIA
+# ============================================
+
+# Facebook
+User-agent: facebookexternalhit
+Allow: /
+Crawl-delay: 1
+
+# Twitter/X
+User-agent: Twitterbot
+Allow: /
+Crawl-delay: 1
+
+# LinkedIn
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 1
+
+# Pinterest
+User-agent: Pinterest
+Allow: /
+Crawl-delay: 1
+
+# Reddit
+User-agent: redditbot
+Allow: /
+Crawl-delay: 1
+
+# Discord
+User-agent: Discordbot
+Allow: /
+Crawl-delay: 1
+
+# Slack
+User-agent: Slackbot
+Allow: /
+Crawl-delay: 1
+
+# WhatsApp
+User-agent: WhatsApp
+Allow: /
+Crawl-delay: 1
+
+# Telegram
+User-agent: TelegramBot
+Allow: /
+Crawl-delay: 1
+
+# ============================================
+# SEO TOOLS
+# ============================================
+
+# Ahrefs
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 2
+
+# SEMrush
+User-agent: SEMrushBot
+Allow: /
+Crawl-delay: 2
+
+# Moz
+User-agent: rogerbot
+Allow: /
+Crawl-delay: 2
+
+# Majestic
+User-agent: MJ12bot
+Allow: /
+Crawl-delay: 2
+
+# ============================================
+# SITEMAP LOCATIONS
+# ============================================
+
+Sitemap: https://zero.ma/sitemap.xml
+Sitemap: https://blog.zero.ma/sitemap.xml
+
+# ============================================
+# HOST
+# ============================================
+Host: zero.ma
+
+# ============================================
+# CRAWL RULES
+# ============================================
+
+# Allow all HTML pages
+Allow: /*.html
+Allow: /*.htm
+
+# Allow all images
+Allow: /*.svg
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.webp
+
+# Allow all CSS
+Allow: /*.css
+
+# Allow all JavaScript
+Allow: /*.js
+
+# Allow all text files
+Allow: /*.txt
+Allow: /*.xml
+Allow: /*.json
+
+# Allow favicon
+Allow: /favicon.svg
+
+# Allow blog posts
+Allow: /posts/
+Allow: /blog/
+
+# ============================================
+# BLOCK (Nothing sensitive, but good practice)
+# ============================================
+
+# Block GitHub Pages internal
+Disallow: /.github/
+Disallow: /.git/
+
+# Block any potential admin
+Disallow: /admin
+Disallow: /wp-admin
+Disallow: /login
