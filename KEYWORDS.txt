@@ -1,0 +1,200 @@
+# ============================================
+#         ZERO — KEYWORD DATABASE
+# ============================================
+
+# KEYWORDS
+Linux specialist Morocco
+IT Infrastructure Marrakech
+Network engineer Morocco
+Linux system administrator Morocco
+CCNA candidate Morocco
+Zero Linux Marrakech
+0x9z portfolio
+Zero portfolio template
+
+# LINUX KEYWORDS
+Linux administration
+Linux system administration
+Linux server management
+Linux command line
+Linux terminal
+Linux bash scripting
+Linux shell scripting
+Linux automation
+Linux troubleshooting
+Linux file permissions
+Linux cron jobs
+Linux system monitoring
+Linux backup scripts
+Linux security hardening
+Fedora Linux
+Debian Linux
+Linux distros 2026
+Linux for beginners
+Linux for IT professionals
+Linux career
+
+# NETWORKING KEYWORDS
+Networking fundamentals
+CCNA certification
+CCNA study guide
+CCNA labs
+Cisco networking
+Cisco packet tracer
+Cisco IOS commands
+Network troubleshooting
+OSI model explained
+Subnetting tutorial
+Subnet calculator
+IPv4 subnetting
+VLAN configuration
+TCP/IP suite
+DNS explained
+DHCP configuration
+Network address translation
+NAT explained
+Routing protocols
+OSPF tutorial
+Network security basics
+Network monitoring tools
+
+# SHELL SCRIPTING KEYWORDS
+Bash scripting tutorial
+Shell script examples
+Bash automation
+Linux shell scripts
+Scripting for sysadmin
+Bash for beginners
+Shell script backup
+System monitoring script
+Command line tools
+Terminal productivity
+
+# IT INFRASTRUCTURE KEYWORDS
+IT infrastructure specialist
+Infrastructure management
+System administration
+Server administration
+Homelab setup
+Homelab documentation
+Home server
+Docker containers
+Docker for beginners
+Virtualization basics
+IT operations
+DevOps basics
+CI/CD pipeline
+GitHub Actions
+Git and GitHub
+
+# CYBERSECURITY KEYWORDS
+Cybersecurity basics
+Linux security
+Network security
+Firewall configuration
+Security hardening
+TCM Security certification
+ISC2 candidate
+ISO 27001
+Ethical hacking basics
+Security best practices
+
+# CAREER KEYWORDS
+IT career Morocco
+IT jobs Morocco
+Remote IT jobs
+Linux jobs
+Network engineer jobs
+IT certifications 2026
+Best IT certifications
+CCNA vs Network+
+LPIC certification
+CompTIA Linux+
+How to become network engineer
+IT portfolio examples
+Tech career advice
+
+# TOOLS & PROJECTS KEYWORDS
+IPv4 subnet calculator
+Subnet calculator online
+GitHub portfolio
+Open source projects
+Linux tools
+Network tools
+IT automation tools
+CV builder
+Backup automation
+System monitoring tools
+
+# LOCATION KEYWORDS
+Marrakech IT
+Morocco tech
+Morocco Linux
+Morocco networking
+Morocco cybersecurity
+North Africa IT
+Africa tech community
+Moroccan developer
+Moroccan engineer
+
+# BRAND KEYWORDS
+Zero portfolio
+Zero blog
+Zero Linux
+Zero IT
+Zero Morocco
+0x9z
+Zero.ma
+blog.zero.ma
+Zero template
+Black and white portfolio
+
+# LONG-TAIL KEYWORDS
+How to learn Linux for free
+Best way to study CCNA
+Linux commands for beginners
+How to build a homelab
+Network troubleshooting for beginners
+How to become a network engineer in Morocco
+Linux certification path 2026
+Best portfolio template for IT professionals
+How to automate Linux backups
+CCNA study plan 2026
+Subnetting made easy for beginners
+Linux system administrator career path
+IT infrastructure basics
+How to document homelab
+Shell scripting projects for beginners
+
+# AI & FUTURE KEYWORDS
+AI ready portfolio
+llms.txt
+AI discoverable
+AI search optimization
+Agentic browsing
+AI portfolio
+Future of IT
+AI in networking
+AI automation
+
+# RECRUITER KEYWORDS
+Hire Linux admin
+Find network engineer
+IT specialist Morocco
+Freelance Linux admin
+Remote sysadmin
+Network technician Morocco
+IT consultant Morocco
+DevOps engineer Morocco
+
+# COMMERCIAL KEYWORDS
+Buy portfolio template
+IT portfolio template $5
+Best portfolio template 2026
+Cheap portfolio template
+Black and white theme
+Minimal portfolio template
+Professional portfolio template
+Network engineer portfolio template
+Linux portfolio template
+IT resume template
