@@ -1,0 +1,137 @@
+{
+    "name": "Zero — Linux & IT Infrastructure Specialist",
+    "short_name": "Zero",
+    "description": "Linux & IT Infrastructure Specialist portfolio. CCNA candidate, shell scripting expert, homelab builder. 99/100 PageSpeed, blog, tools, and premium template.",
+    "id": "https://zero.ma/",
+    "start_url": "https://zero.ma/",
+    "scope": "https://zero.ma/",
+    "display": "standalone",
+    "display_override": ["standalone", "minimal-ui", "fullscreen", "window-controls-overlay"],
+    "orientation": "any",
+    "dir": "ltr",
+    "lang": "en",
+    "categories": ["portfolio", "technology", "education", "productivity", "business"],
+    "theme_color": "#000000",
+    "background_color": "#ffffff",
+    "prefer_related_applications": false,
+    "launch_handler": {
+        "client_mode": ["navigate-existing", "auto"]
+    },
+    "icons": [
+        {
+            "src": "favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "favicon.svg",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "favicon.svg",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Blog",
+            "short_name": "Blog",
+            "description": "Read Zero's latest articles",
+            "url": "https://blog.zero.ma/",
+            "icons": [
+                {
+                    "src": "favicon.svg",
+                    "sizes": "any",
+                    "type": "image/svg+xml"
+                }
+            ]
+        },
+        {
+            "name": "Projects",
+            "short_name": "Projects",
+            "description": "View Zero's GitHub projects",
+            "url": "https://zero.ma/#projects",
+            "icons": [
+                {
+                    "src": "favicon.svg",
+                    "sizes": "any",
+                    "type": "image/svg+xml"
+                }
+            ]
+        },
+        {
+            "name": "Buy Template",
+            "short_name": "Template",
+            "description": "Get the Black & White Portfolio Template",
+            "url": "https://payhip.com/b/Qfzmn",
+            "icons": [
+                {
+                    "src": "favicon.svg",
+                    "sizes": "any",
+                    "type": "image/svg+xml"
+                }
+            ]
+        }
+    ],
+    "share_target": {
+        "action": "https://zero.ma/#contact",
+        "method": "GET",
+        "params": {
+            "title": "title",
+            "text": "text",
+            "url": "url"
+        }
+    },
+    "handle_links": "preferred",
+    "edge_side_panel": {
+        "preferred_width": 400
+    },
+    "screenshots": [
+        {
+            "src": "https://zero.ma/favicon.svg",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "form_factor": "wide",
+            "label": "Zero Portfolio — Desktop View"
+        },
+        {
+            "src": "https://zero.ma/favicon.svg",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "form_factor": "narrow",
+            "label": "Zero Portfolio — Mobile View"
+        }
+    ],
+    "related_applications": [],
+    "protocol_handlers": [
+        {
+            "protocol": "web+zero",
+            "url": "https://zero.ma/?q=%s"
+        }
+    ],
+    "file_handlers": [
+        {
+            "action": "https://zero.ma/",
+            "accept": {
+                "text/plain": [".txt", ".md"],
+                "text/html": [".html", ".htm"]
+            }
+        }
+    ],
+    "note_taking": {
+        "new_note_url": "https://blog.zero.ma/"
+    },
+    "permissions": [],
+    "gcm_sender_id": ""
+}
