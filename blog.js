@@ -5,7 +5,7 @@
 class BlogApp {
     constructor() {
         this.mediumRSS = 'https://medium.com/feed/@0x9z';
-        this.apiURL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(this.mediumRSS)}`;
+        this.apiURL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(this.mediumRSS)}&cache=${Date.now()}`;
         this.init();
     }
 
